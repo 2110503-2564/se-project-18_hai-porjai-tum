@@ -4,15 +4,15 @@ import Card from "./Card";
 import * as React from 'react';
 import Link from "next/link";
 export default function CardPanel() {
-    const [venueResponse, setVenueResponse] = useState<VenueItem[] | null>(null);
+    const [carResponse, setVenueResponse] = useState<CarItem[] | null>(null);
 
-    const compareReducer = (compareList: Map<string, number>, action: { type: string, venueName: string, rating?: number | 0 }) => {
+    const compareReducer = (compareList: Map<string, number>, action: { type: string, carName: string, rating?: number | 0 }) => {
         switch (action.type) {
             case 'add': {
-                return new Map(compareList.set(action.venueName, action.rating || 0));
+                return new Map(compareList.set(action.carName, action.rating || 0));
             }
             case 'remove': {
-                compareList.delete(action.venueName);
+                compareList.delete(action.carName);
                 return new Map(compareList);
             }
             default:
@@ -27,7 +27,7 @@ export default function CardPanel() {
     //     { vid: "002", name: "Spark Space", image: "/img/sparkspace.jpg" },
     //     { vid: "003", name: "The Grand Table", image: "/img/grandtable.jpg" }
     // ];
-    if (!venueResponse) return (<p>Venue Panel is Loading...</p>)
+    if (!carResponse) return (<p>Venue Panel is Loading...</p>)
     return (
         <div>
             <div style={{
@@ -36,25 +36,26 @@ export default function CardPanel() {
                 justifyContent: "space-around", flexWrap: "wrap", padding: "10px"
             }}>
                 {
-                    venueResponse.map((venueItem) => (
+                    carResponse.map((CarItem) => (
                         <div className="w-1/5">
-                            <Link href={`/venue/${venueItem.id}`} className="w-1/5">
+                            <Link href={`/venue/${CarItem.id}`} className="w-1/5">
                                 <Card
-                                    venueName={venueItem.name}
-                                    imgSrc={venueItem.picture}
+                                    carName={CarItem.model}
+                                    imgSrc={CarItem.picture}
+                                    rating={5} 
                                 />
                             </Link>
                         </div>
 
                     ))
                 }
-                {/* <Card venueName="The Bloom Pavilion" imgSrc="/img/bloom.jpg"
+                {/* <Card carName="The Bloom Pavilion" imgSrc="/img/bloom.jpg"
                 onCompare={handleCompare}
             />
-            <Card venueName="Spark Space" imgSrc="/img/sparkspace.jpg"
+            <Card carName="Spark Space" imgSrc="/img/sparkspace.jpg"
                 onCompare={handleCompare}
             />
-            <Card venueName="The Grand Table" imgSrc="/img/grandtable.jpg"
+            <Card carName="The Grand Table" imgSrc="/img/grandtable.jpg"
                 onCompare={handleCompare}
             /> */}
             </div>
@@ -64,12 +65,12 @@ export default function CardPanel() {
                 justifyContent: "flex-start", flexWrap: "wrap", padding: "10px"
             }}>
                 <div className="text-xl font-medium">Venue List Ratings: {compareList.size}</div>
-                {Array.from(compareList).map(([venueName, rating]) => (
-                    <div key={venueName}
-                        onClick={() => dispatchCompare({ type: 'remove', venueName })}
+                {Array.from(compareList).map(([carName, rating]) => (
+                    <div key={carName}
+                        onClick={() => dispatchCompare({ type: 'remove', carName })}
                         style={{ cursor: "pointer" }}
-                        data-testid={venueName}>
-                        {venueName}: {rating}
+                        data-testid={carName}>
+                        {carName}: {rating}
                     </div>
                 ))
                 }

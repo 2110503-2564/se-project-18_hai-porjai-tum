@@ -1,7 +1,7 @@
 import styles from './booking.module.css'
-import BookingMenu from '@/components/BookingMenu'
+import BookingMenu from '@/components/RentalMenu'
 
-export default function BookingLayout({ children }: { children: React.ReactNode }) {
+export default function RentalLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className={styles.sectionlayout}>
             {/* <BookingMenu /> */}

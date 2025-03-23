@@ -1,27 +1,34 @@
-interface VenueItem {
-    _id: string,
-    name: string,
-    address: string,
-    district: string,
-    province: string,
-    postalcode: string,
-    tel: string,
-    picture: string,
-    dailyrate: number,
-    __v: number,
-    id: string
-  }
+interface CarItem {
+  id: string
+  model: string
+  picture: string
   
-  interface VenueJson {
-    success: boolean,
-    count: number,
-    pagination: Object,
-    data: VenueItem[]
   }
 
-  interface BookingItem {
-    nameLastname: string;
-    tel: string;
-    venue: string;
-    bookDate: string;
+  
+  
+  interface CarJson {
+    success: boolean,
+    count: number,
+    
+    data: CarItem[]
+  }
+
+    
+  interface RentalJson {
+    success: boolean,
+    count: number,
+    
+    data: RentalItem[]
+  }
+
+
+  interface RentalItem {
+    carId: string
+    carModel: string
+    numOfDays: number
+    pickupDate: string
+    pickupLocation: string
+    returnDate: string
+    returnLocation: string
   }

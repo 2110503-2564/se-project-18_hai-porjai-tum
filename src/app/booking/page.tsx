@@ -8,7 +8,7 @@ import { AppDispatch } from "../../redux/store";
 import { addBooking, removeBooking } from "../../redux/features/bookSlice";
 import { useSearchParams } from "next/navigation";
 
-export default function Booking() {
+export default function Rental() {
     const [bookDate, setBookDate] = useState<Dayjs | null>(null);
     const [venue, setVenue] = useState<string>("Bloom");
     const [nameLastname, setNameLastname] = useState<string>("");
@@ -42,23 +42,23 @@ export default function Booking() {
         GrandTable: "The Grand Table"
     };
 
-    const makeBooking = () => {
-        if (venue && bookDate) {
-            const fullVenueName = venueMap[venue] || venue;
-            const formattedDate = dayjs(bookDate).format("YYYY/MM/DD");
+    // const makeBooking = () => {
+    //     if (venue && bookDate) {
+    //         const fullVenueName = venueMap[venue] || venue;
+    //         const formattedDate = dayjs(bookDate).format("YYYY/MM/DD");
 
-            const item: BookingItem = {
-                nameLastname,
-                tel,
-                venue: fullVenueName,
-                bookDate: formattedDate,
-            };
-            dispatch(addBooking(item));
-            alert("Booking successful!");
-        } else {
-            alert("Please fill in all fields before booking.");
-        }
-    };
+    //         const item: RentalItem = {
+    //             nameLastname,
+    //             tel,
+    //             venue: fullVenueName,
+    //             bookDate: formattedDate,
+    //         };
+    //         dispatch(addBooking(item));
+    //         alert("Booking successful!");
+    //     } else {
+    //         alert("Please fill in all fields before booking.");
+    //     }
+    // };
 
 
     return (
@@ -94,7 +94,7 @@ export default function Booking() {
 
             <button
                 className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white"
-                onClick={makeBooking}
+                // onClick={makeBooking}
             >
                 Book Venue
             </button>

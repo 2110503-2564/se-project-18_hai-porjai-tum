@@ -14,18 +14,18 @@ function getProgressBarColor(rating: number): string {
     return "bg-red-500"; // Negative: Red
 }
 
-export default function Card({ venueName, imgSrc, rating }: { venueName: string, imgSrc: string, rating: number }) {
+export default function Card({ carName, imgSrc, rating }: { carName: string, imgSrc: string, rating: number }) {
     return (
         <InteractiveCard>
             <div className="w-full h-[70%] relative rounded-t-lg">
                 <Image src={imgSrc}
-                    alt={venueName}
+                    alt={carName}
                     fill={true}
                     objectFit='cover'
                     className='object-cover rounded-t-lg' />
             </div>
             <div className="w-full h-[30%] p-[10px] flex flex-col justify-between">
-                <h3 className="font-semibold text-lg">{venueName}</h3>
+                <h3 className="font-semibold text-lg">{carName}</h3>
                 <div className="w-full bg-gray-300 h-2 rounded-full overflow-hidden">
                     <div 
                         className={`${getProgressBarColor(rating)} h-full transition-all`} 

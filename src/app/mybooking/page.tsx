@@ -1,9 +1,9 @@
 "use client"
-import BookingList from "@/components/BookingList"
-export default function MybookingPage() {
+import RentalList from "@/components/RentalList"
+export default function MyrentalPage() {
     return (
         <main>
-            <BookingList></BookingList>
+            <RentalList></RentalList>
         </main>
     )
 }
