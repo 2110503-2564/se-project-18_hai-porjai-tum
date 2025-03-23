@@ -16,7 +16,7 @@ export default async function VenueCatalog({ carsJson }: { carsJson: Promise<Car
                 {
                     carsJsonReady.data.map((CarItem: CarItem) => (
                         <Link key={CarItem.id} href={`/venue/${CarItem.id}`} className="w-1/5">
-                            <Card carName={CarItem.name}
+                            <Card carName={CarItem.model}
                                 imgSrc={CarItem.picture}
                                 rating={5} />
                         </Link>

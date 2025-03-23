@@ -40,7 +40,7 @@ export default function CardPanel() {
                         <div className="w-1/5">
                             <Link href={`/venue/${CarItem.id}`} className="w-1/5">
                                 <Card
-                                    carName={CarItem.name}
+                                    carName={CarItem.model}
                                     imgSrc={CarItem.picture}
                                     rating={5} 
                                 />

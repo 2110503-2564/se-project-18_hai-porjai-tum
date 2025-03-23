@@ -17,10 +17,12 @@ export default function BookingList() {
                 bookItems.map((rentalItem: RentalItem) => (
                     <div className="bg-slate-200 rounded px-5 mx-5 py-2 my-2 flex justify-between items-center">
                         <div>
-                            <div>Name: {rentalItem.nameLastname}</div>
-                            <div className="text-md">Tel: {rentalItem.tel}</div>
-                            <div className="text-md">Location: {rentalItem.venue}</div>
-                            <div className="text-md">Booking Date: {rentalItem.bookDate}</div>
+                            <div>CarId: {rentalItem.carId}</div>
+                            <div className="text-md">numberOfDays: {rentalItem.numOfDays}</div>
+                            <div className="text-md">Pickup Location: {rentalItem.returnLocation}</div>
+                            <div className="text-md">Pickup Date: {rentalItem.pickupDate}</div>
+                            <div className="text-md">Return Date: {rentalItem.returnDate}</div>
+                            <div className="text-md">Return Location: {rentalItem.returnLocation}</div>
                         </div>
                         <button
                             onClick={() => dispatch(removeBooking(rentalItem))}

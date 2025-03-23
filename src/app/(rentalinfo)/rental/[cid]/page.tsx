@@ -10,23 +10,23 @@ export default async function CarDetailPage({ params }: { params: { vid: string 
     const CarDetail = await getCar(params.vid)
     return (
         <main className="text-center p-14">
-            <h1 className="text-2xl font-medium">{CarDetail.data.name}</h1>
+            <h1 className="text-2xl font-medium">{CarDetail.data.carId}</h1>
             <div className="flex flex-row my-5">
                 <Image src={CarDetail.data.picture}
                     alt='Product Picture'
                     width={0} height={0} sizes="100vw"
                     className='rounded-lg w-[30%] bg-black' />
-                <div className="text-md mx-5 text-left">Name: {CarDetail.data.name}
-                    <div>Address: {CarDetail.data.address} </div>
-                    <div>District: {CarDetail.data.district}</div>
-                    <div>Province: {CarDetail.data.province}</div>
-                    <div>Postal Code: {CarDetail.data.postalcode}</div>
-                    <div>Tel: {CarDetail.data.tel}</div>
-                    <div>Daily Rate: {CarDetail.data.dailyrate}</div>
+                <div className="text-md mx-5 text-left">Name: {CarDetail.data.carModel}
+                    <div>numOfDays: {CarDetail.data. numOfDays} </div>
+                    <div>pickupDate: {CarDetail.data.pickupDate}</div>
+                    <div>pickupLocation: {CarDetail.data.pickupLocation}</div>
+                    <div>returnDate: {CarDetail.data.returnDate}</div>
+                    <div>returnLocation: {CarDetail.data.returnLocation}</div>
+                    
                     <Link href={`/booking?id=${params.vid}&model=${CarDetail.data.name}`}>
                         <button className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-1
                     text-white shadow-sm">
-                            Booking
+                            Rental
                         </button>
                     </Link>
                 </div>

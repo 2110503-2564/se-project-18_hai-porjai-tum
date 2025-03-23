@@ -42,23 +42,23 @@ export default function Rental() {
         GrandTable: "The Grand Table"
     };
 
-    const makeBooking = () => {
-        if (venue && bookDate) {
-            const fullVenueName = venueMap[venue] || venue;
-            const formattedDate = dayjs(bookDate).format("YYYY/MM/DD");
+    // const makeBooking = () => {
+    //     if (venue && bookDate) {
+    //         const fullVenueName = venueMap[venue] || venue;
+    //         const formattedDate = dayjs(bookDate).format("YYYY/MM/DD");
 
-            const item: BookingItem = {
-                nameLastname,
-                tel,
-                venue: fullVenueName,
-                bookDate: formattedDate,
-            };
-            dispatch(addBooking(item));
-            alert("Booking successful!");
-        } else {
-            alert("Please fill in all fields before booking.");
-        }
-    };
+    //         const item: RentalItem = {
+    //             nameLastname,
+    //             tel,
+    //             venue: fullVenueName,
+    //             bookDate: formattedDate,
+    //         };
+    //         dispatch(addBooking(item));
+    //         alert("Booking successful!");
+    //     } else {
+    //         alert("Please fill in all fields before booking.");
+    //     }
+    // };
 
 
     return (
