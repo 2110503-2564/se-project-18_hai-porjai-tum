@@ -1,4 +1,4 @@
-interface VenueItem {
+interface CarItem {
     _id: string,
     name: string,
     address: string,
@@ -11,15 +11,26 @@ interface VenueItem {
     __v: number,
     id: string
   }
+
   
-  interface VenueJson {
+  
+  interface CarJson {
     success: boolean,
     count: number,
     pagination: Object,
-    data: VenueItem[]
+    data: CarItem[]
   }
 
-  interface BookingItem {
+    
+  interface RentalJson {
+    success: boolean,
+    count: number,
+    pagination: Object,
+    data: RentalItem[]
+  }
+
+
+  interface RentalItem {
     nameLastname: string;
     tel: string;
     venue: string;

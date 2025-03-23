@@ -8,7 +8,7 @@ import { AppDispatch } from "../../redux/store";
 import { addBooking, removeBooking } from "../../redux/features/bookSlice";
 import { useSearchParams } from "next/navigation";
 
-export default function Booking() {
+export default function Rental() {
     const [bookDate, setBookDate] = useState<Dayjs | null>(null);
     const [venue, setVenue] = useState<string>("Bloom");
     const [nameLastname, setNameLastname] = useState<string>("");
