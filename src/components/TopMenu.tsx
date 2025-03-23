@@ -18,7 +18,9 @@ export default async function TopMenu() {
             </div>
             <div className="flex items-center ml-auto">
                 <TopMenuItem title='Rent' pageRef='/booking' />
+                <Link href="/">
                 <Image src={'/img/logo.png'} className="h-full w-auto" alt='logo' width={40} height={40} />
+                </Link>
             </div>
         </div>
     )
