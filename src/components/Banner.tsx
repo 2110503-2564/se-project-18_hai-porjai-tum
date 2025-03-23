@@ -18,7 +18,7 @@ export default function Banner() {
             <Image src={covers[index % 4]}
                 alt='Main'
                 fill={true}
-                objectFit='cover'
+                className='object-cover'
                 priority
             />
             <div className={styles.bannerText}>
@@ -57,6 +57,7 @@ export default function Banner() {
                         alt="Explore Cars"
                         width={160} 
                         height={120} 
+                        priority
                     />
                 </motion.div>
                 
