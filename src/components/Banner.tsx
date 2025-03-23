@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
 
 export default function Banner() {
-    const covers = ['/img/cover2.jpg', '/img/cover3.png', '/img/cover2.jpg', '/img/cover4.png']
+    const covers = ['/img/cover2.jpg', '/img/cover.png', '/img/cover3.png', '/img/cover4.png']
     const [index, setIndex] = useState(0)
     const router = useRouter()
     const { data: session } = useSession()
@@ -47,15 +47,15 @@ export default function Banner() {
                     duration: 10, // Adjust speed (increase for slower movement)
                     ease: "linear" // Smooth constant movement
                 }}
-                className="z-30 absolute bottom-10 right-0 cursor-pointer"
-                onClick={(e) => { e.preventDefault(); router.push('/venue') }}>
+                className="z-30 absolute bottom-10 right-0 cursor-pointer">
                 
                 {/* Car Image as Button */}
                 <Image 
                     src="/img/car-icon.png"  // Replace with your car image
                     alt="Explore Cars"
-                    width={220} 
-                    height={180} 
+                    width={420} 
+                    height={380} 
+                onClick={(e) => { e.preventDefault(); router.push('/venue') }}
                 />
             </motion.div>
         </div>
