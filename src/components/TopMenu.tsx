@@ -13,7 +13,7 @@ export default async function TopMenu() {
                 <Image src={'/img/logo.png'} className="h-full w-auto" alt='logo' width={40} height={40} />
                 </Link>
             <div className="flex items-center ml-auto">
-                <TopMenuItem title='Rent' pageRef='/booking' />
+                <TopMenuItem title='Rent' pageRef='/rental' />
             </div>
             <div className="flex flex-row absolute left-0 h-full">
                 {

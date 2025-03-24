@@ -38,7 +38,7 @@ export default function Banner() {
                 </div>
             ) : null}
 
-            {/* 🚗 Image Button */}
+            
             <motion.div 
                 className="z-30 absolute bottom-10 right-10 cursor-pointer flex items-center gap-4"
                 initial={{ x: 0 }}
@@ -46,9 +46,8 @@ export default function Banner() {
                 transition={{ type: 'tween', duration: 0.5, ease: 'easeOut' }}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
-                onClick={(e) => { e.preventDefault(); router.push('/venue') }}>
+                onClick={(e) => {e.stopPropagation(); e.preventDefault(); router.push('/car') }}>
                 
-                {/* Car Image as Button */}
                 <motion.div 
                     animate={hover ? { rotate: [0, -5, 5, -5, 5, 0] } : {}} 
                     transition={{ duration: 0.5, repeat: Infinity, repeatType: "loop" }}>
@@ -61,7 +60,6 @@ export default function Banner() {
                     />
                 </motion.div>
                 
-                {/* Get Start Text */}
                 <motion.span 
                     className="text-white text-3xl font-bold drop-shadow-lg"
                     initial={{ opacity: 0 }}

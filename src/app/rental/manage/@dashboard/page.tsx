@@ -1,4 +1,4 @@
-import DateReserve from "@/components/DateReserve"
+import DateReserve from "@/components/LocationDateReserve"
 import TextField from "@mui/material/TextField";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { getServerSession } from "next-auth"

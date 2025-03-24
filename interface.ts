@@ -1,6 +1,9 @@
 interface CarItem {
   id: string
+  name: string
   model: string
+  tel: string
+  pricePerDay: number
   picture: string
   
   }
