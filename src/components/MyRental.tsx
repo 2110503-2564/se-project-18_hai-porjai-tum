@@ -57,6 +57,7 @@ export default function MyRental() {
                                     {userJson?.data.role === "admin" ? <div>User Id: {rentalItem.user}</div> : null}
                                     <div>Model: {rentalItem.car?.model}</div>
                                     <div className="text-md">Number Of Days: {dayjs(rentalItem.returnDate).diff(dayjs(rentalItem.pickupDate), "day")}</div>
+                                    <div className="text-md">Assume Price: {rentalItem.assumePrice}</div>
                                     <div className="text-md">Pickup Location: {rentalItem.returnLocation}</div>
                                     <div className="text-md">Pickup Date: {rentalItem.pickupDate}</div>
                                     <div className="text-md">Return Location: {rentalItem.returnLocation}</div>

@@ -72,7 +72,7 @@ export default function ManageRental({ searchParams }: { searchParams: { [id: st
         }
 
     return (
-        <main className="flex flex-col space-y-4">
+        <main className="flex flex-col space-y-4 w-full">
             <div className="text-center text-lg ">
                 Manage Your Rental</div>
                 {loading ? <p>Loading...</p> : !rentalsJson ? null:
