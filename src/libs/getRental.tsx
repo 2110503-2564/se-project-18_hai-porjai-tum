@@ -1,5 +1,5 @@
 export default async function getRental(id: string, token: string) {
-    const response = await fetch(`http://localhost:5000/api/v1/rentals/${id}`, {
+    const response = await fetch(`https://sw2-backend.onrender.com/api/v1/rentals/${id}`, {
         method: "GET",
         headers: {
             authorization: `Bearer ${token}`,

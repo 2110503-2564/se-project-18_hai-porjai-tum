@@ -1,5 +1,5 @@
 export default async function updateCar(id: string, name: string, model:string, tel:string, pricePerDay:number, picture:string, token: string) {
-    const response = await fetch(`http://localhost:5000/api/v1/cars/${id}`, {
+    const response = await fetch(`https://sw2-backend.onrender.com/api/v1/cars/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

@@ -6,7 +6,7 @@ export default async function updateRental(id: string,
     pickupLocation: string,
     returnLocation: string,
      token: string) {
-    const response = await fetch(`http://localhost:5000/api/v1/rentals/${id}`, {
+    const response = await fetch(`https://sw2-backend.onrender.com/api/v1/rentals/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

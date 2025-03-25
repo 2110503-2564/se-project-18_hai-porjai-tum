@@ -3,14 +3,19 @@ import TopMenuItem from './TopMenuItem';
 import { getServerSession } from 'next-auth';
 import { Link } from '@mui/material';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
+import getUserProfile from '@/libs/getUserProfile';
 
 export default async function TopMenu() {
     const session = await getServerSession(authOptions);
+    const response :UserJson =  session ?   await getUserProfile(session.user.token) : null ;
+    
+
+    
 
     return (
         <div
             className="h-[60px] bg-gray-900 fixed top-0 right-0 z-50 border-b border-gray-700 
-            flex items-center justify-between w-full px-4 font-poppins text-white"
+            flex items-center  w-full px-4 font-poppins text-white"
         >
             {/* Left Section: Logo */}
             <Link href="/" className="flex items-center">
@@ -26,8 +31,8 @@ export default async function TopMenu() {
 
             {/* Center Section: Menu Items */}
             <ul className="flex items-center gap-8">
-                <li className="cursor-pointer hover:text-gray-400">Rental</li>
-                <li className="cursor-pointer flex items-center gap-1 hover:text-gray-400">
+                <li className="cursor-pointer hover:text-gray-400 px-14">Rental</li>
+                <li className="cursor-pointer flex items-center gap-1 hover:text-gray-400 ">
                     Select Car
                     <Image 
                         src="/img/orig.png" 
@@ -38,18 +43,37 @@ export default async function TopMenu() {
                 </li>
                 <li className="cursor-pointer hover:text-gray-400">About us</li>
             </ul>
+            
 
             {/* Right Section: User Actions */}
-            <div className="flex items-center gap-6">
+            
+            <div className="flex items-center gap-6 ml-auto  text-white">
                 {session ? (
                     <>
+                    <TopMenuItem title="Cart" pageRef="/mycart"  />
                         <TopMenuItem
-                            title={session.user.role === 'admin' ? 'Rentals' : 'My Rentals'}
+                            title={response.data.role === 'admin' ? 'Rentals' : 'My Rentals'}
                             pageRef="/myrental"
                         />
+                        { response.data.role === 'admin' && (
+                            <TopMenuItem
+                                title="Manage Cars"
+                                pageRef="/car/manage"
+                            />
+                        )}
                         <Link href="/api/auth/signout">
                             <div className="cursor-pointer hover:text-gray-400 text-white">Sign-Out</div>
                         </Link>
+                        <div className="flex items-center gap-2">
+                            <Image
+                                src={ "/img/log in2.png"} 
+                                alt="User Profile Picture"
+                                width={30}
+                                height={30}
+                                className="rounded-full"
+                            />
+                            <span>{session.user.name || "User"}</span>
+                        </div>
                     </>
                 ) : (
                     <>
@@ -61,16 +85,7 @@ export default async function TopMenu() {
                         </Link>
                     </>
                 )}
-                <TopMenuItem title="Cart" pageRef="/mycart" />
-                <div className="flex items-center gap-1 cursor-pointer hover:text-gray-400">
-                    <span>User</span>
-                    <Image 
-                        src="/img/orig.png" 
-                        alt="Dropdown Icon" 
-                        width={12} 
-                        height={12}
-                    />
-                </div>
+              
             </div>
         </div>
     );

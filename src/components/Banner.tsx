@@ -32,8 +32,9 @@ export default function Banner() {
                 priority
             />
             {session && (
-                <div className="z-30 absolute top-5 right-10 font-semibold text-black text-xl">
-                    Welcome {session.user?.name}
+                <div className="z-30 absolute top-5 right-5 font-semibold text-black text-xl">
+                     <Image src="/img/sign.png" alt="Fire Icon" width={20} height={20} />
+                    
                 </div>
             )}
 
