@@ -4,7 +4,7 @@ import React, { Suspense } from "react";
 
 export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJson> }) {
     const carsJsonReady = await carsJson;
-
+    
     return (
         <div className="pt-10">
             <h3 className="text-3xl font-bold text-lg text-white text-center">
