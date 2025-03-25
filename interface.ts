@@ -5,6 +5,7 @@ interface CarItem {
   tel: string
   pricePerDay: number
   picture: string
+  rating:number
   
   }
 

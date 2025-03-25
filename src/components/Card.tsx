@@ -5,12 +5,15 @@ import InteractiveCard from './InteractiveCard'
 function getReviewSentiment(rating: number): string {
     if (rating > 3) return "Mostly Positive";
     if (rating >= 2) return "Mixed";
+    if(rating == null) return "No Review";
     return "Mostly Negative";
 }
 
 function getProgressBarColor(rating: number): string {
     if (rating > 3) return "bg-red-500"; // Positive: Yellow
     if (rating >= 2) return "bg-yellow-500";  // Mixed: Green
+    if(rating == null) return "bg-white-500";
+    
     return "bg-black-500"; // Negative: Red
 }
 
