@@ -14,10 +14,10 @@ export default function Banner() {
     const { data: session } = useSession()
 
     const cars = [
-        { name: "SEDAN", image: "/img/sedan.png", textImage: "/img/sedan(1).png", price: "2564 Free" },
-        { name: "SUV", image: "/img/suv.png", textImage: "/img/suv(1).png", price: "1088 Free" },
-        { name: "HATCHBACK", image: "/img/hatchback.png", textImage: "/img/hatchback(1).png", price: "942 Free" },
-        { name: "PICK UP", image: "/img/pickup.png", textImage: "/img/pick up.png", price: "316 Free" },
+        { name: "SEDAN", image: "/img/SEDAN.png", textImage: "/img/SEDAN(1).png", price: "2564 Free" },
+        { name: "SUV", image: "/img/SUV.png", textImage: "/img/SUV(1).png", price: "1088 Free" },
+        { name: "HATCHBACK", image: "/img/HATCHBACK.png", textImage: "/img/HATCHBACK(1).png", price: "942 Free" },
+        { name: "PICK UP", image: "/img/PickUp.png", textImage: "/img/PICK UP.png", price: "316 Free" },
     ];
 
     return (
