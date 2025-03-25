@@ -2,8 +2,8 @@ import RentalMenu from "@/components/RentalMenu";
 import getCars from "@/libs/getCars";
 
 export default function ManageBookingLayout(
-    { children, dashboard}:
-        { children: React.ReactNode, dashboard: React.ReactNode}
+    { children}:
+        { children: React.ReactNode }
 ) {
     const carsPromise = getCars()
     return (
