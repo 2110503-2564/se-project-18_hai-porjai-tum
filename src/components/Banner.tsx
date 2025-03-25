@@ -7,38 +7,93 @@ import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
 
 export default function Banner() {
-    const covers = ['/img/cover2.jpg', '/img/cover.png', '/img/cover3.png', '/img/cover4.png']
+    const covers = ['/img/Component.png', '/img/Component.png', '/img/Component.png', '/img/Component.png']
     const [index, setIndex] = useState(0)
     const [hover, setHover] = useState(false);
     const router = useRouter()
     const { data: session } = useSession()
 
+    const cars = [
+        { name: "SEDAN", image: "/img/sedan.png", textImage: "/img/sedan(1).png", price: "2564 Free" },
+        { name: "SUV", image: "/img/suv.png", textImage: "/img/suv(1).png", price: "1088 Free" },
+        { name: "HATCHBACK", image: "/img/hatchback.png", textImage: "/img/hatchback(1).png", price: "942 Free" },
+        { name: "PICK UP", image: "/img/pickup.png", textImage: "/img/pick up.png", price: "316 Free" },
+    ];
+
     return (
         <div className={styles.banner} onClick={() => setIndex(index + 1)}>
-            <Image src={covers[index % 4]}
-                alt='Main'
+
+             
+            <Image 
+                src={covers[index % 4]}
+                alt="Main"
                 fill={true}
-                className='object-cover'
+                className="object-cover"
                 priority
             />
-            <div className={styles.bannerText}>
-                <h1 className="text-8xl font-bold tracking-wide text-transparent 
-                    bg-clip-text bg-gradient-to-r from-yellow-400 to-red-600 drop-shadow-lg">
-                    Car
-                </h1>
-                <h3 className="text-6xl font-serif italic text-white tracking-widest 
-                    drop-shadow-md">
-                    Rental
-                </h3>
-            </div>
-            
-            {session ? (
-                <div className='z-30 absolute top-5 right-10 font-semibold text-black text-xl'>
+            {session && (
+                <div className="z-30 absolute top-5 right-10 font-semibold text-black text-xl">
                     Welcome {session.user?.name}
                 </div>
-            ) : null}
+            )}
 
-            
+            {/* Display Cards */}
+            <motion.div 
+                className="absolute top-[20%] left-[11%] flex gap-32"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+            >
+                {cars.map((car, i) => (
+                    <motion.div 
+                        key={i} 
+                        className="relative bg-gray-800 p-4 rounded-lg shadow-lg text-center w-56 h-96 flex  justify-center overflow-hidden"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ type: "spring", stiffness: 200 }}
+                    >
+                        {/* Car Image with Text Image Beside */}
+                        <div className="relative flex ">
+                           
+                            {/* Car Image */}
+                            <Image 
+                                src={car.image} 
+                                alt={car.name} 
+                                layout="intrinsic" 
+                                width={180} 
+                                height={240} 
+                                className="object-contain z-10"
+                            />
+                             {/* Text Image */}
+                             <Image 
+                                src={car.textImage} 
+                                alt={`${car.name} Text`}
+                                layout="intrinsic" 
+                                width={30} 
+                                height={80} 
+                                className="top-[4%] absolute left-1 object-contain z-0"
+                            />
+                        </div>
+
+                        {/* Pricing Box */}
+                        <div className="absolute bottom-4 bg-white px-4 py-2 text-black font-bold text-lg flex items-center gap-2 rounded-lg">
+                            {car.price} 
+                            <Image src="/img/tinder.png" alt="Fire Icon" width={20} height={20} />
+                        </div>
+                    </motion.div>
+                ))}
+            </motion.div>
+             {/* New Image Component */}
+        <div className="absolute top-10 left-10">
+        <Image 
+            src="/img/Mobile.png"
+            alt="Additional Component" 
+            width={120} 
+            height={120} 
+            className="top-40 object-contain z-30"
+        />
+           </div>
+
+            {/* Call to Action */}
             <motion.div 
                 className="z-30 absolute bottom-10 right-10 cursor-pointer flex items-center gap-4"
                 initial={{ x: 0 }}
@@ -46,13 +101,14 @@ export default function Banner() {
                 transition={{ type: 'tween', duration: 0.5, ease: 'easeOut' }}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
-                onClick={(e) => {e.stopPropagation(); e.preventDefault(); router.push('/car') }}>
-                
+                onClick={(e) => { e.stopPropagation(); e.preventDefault(); router.push('/car') }}
+            >
                 <motion.div 
                     animate={hover ? { rotate: [0, -5, 5, -5, 5, 0] } : {}} 
-                    transition={{ duration: 0.5, repeat: Infinity, repeatType: "loop" }}>
+                    transition={{ duration: 0.5, repeat: Infinity, repeatType: "loop" }}
+                >
                     <Image 
-                        src="/img/car-icon.png"  // Replace with your car image
+                        src="/img/car-icon.png" 
                         alt="Explore Cars"
                         width={160} 
                         height={120} 
@@ -64,7 +120,8 @@ export default function Banner() {
                     className="text-white text-3xl font-bold drop-shadow-lg"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: hover ? 1 : 0 }}
-                    transition={{ duration: 0.5, ease: 'easeOut' }}>
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                >
                     Get Start
                 </motion.span>
             </motion.div>
