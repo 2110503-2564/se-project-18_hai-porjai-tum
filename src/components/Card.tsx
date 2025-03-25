@@ -9,32 +9,50 @@ function getReviewSentiment(rating: number): string {
 }
 
 function getProgressBarColor(rating: number): string {
-    if (rating > 3) return "bg-yellow-500"; // Positive: Yellow
-    if (rating >= 2) return "bg-green-500";  // Mixed: Green
-    return "bg-red-500"; // Negative: Red
+    if (rating > 3) return "bg-red-500"; // Positive: Yellow
+    if (rating >= 2) return "bg-yellow-500";  // Mixed: Green
+    return "bg-black-500"; // Negative: Red
 }
+
 
 export default function Card({ carName, imgSrc, rating }: { carName: string, imgSrc: string, rating: number }) {
     return (
-        <InteractiveCard>
+        
+
+        
+
+        
+        <InteractiveCard className="bg-gray-300 border border-gray-300 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            {/* Image Section */}
             <div className="w-full h-[70%] relative rounded-t-lg">
-                <Image src={imgSrc}
+                <Image 
+                    src={imgSrc}
                     alt={carName}
                     fill={true}
-                    objectFit='cover'
-                    className='object-cover rounded-t-lg' />
+                    objectFit="cover"
+                    className="object-cover rounded-t-lg"
+                />
             </div>
-            <div className="w-full h-[30%] p-[10px] flex flex-col justify-between">
-                <h3 className="font-semibold text-lg">{carName}</h3>
-                <div className="w-full bg-gray-300 h-2 rounded-full overflow-hidden">
+
+            {/* Content Section */}
+            <div className="w-full h-[30%] p-[10px] flex flex-col justify-between bg-gray-900">
+                {/* Car Name */}
+                <h3 className="font-bold text-lg text-white">{carName}</h3>
+
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-300 h-2 rounded-full overflow-hidden mt-2">
                     <div 
                         className={`${getProgressBarColor(rating)} h-full transition-all`} 
-                        style={{ width: `${(rating / 5) * 100}%` }} />
+                        style={{ width: `${(rating / 5) * 100}%` }} 
+                    />
                 </div>
-                <span className="text-sm text-gray-600 mt-1">
+
+                {/* Rating and Sentiment */}
+                <span className="text-sm text-gray-200 mt-2 font-medium">
                     {getReviewSentiment(rating)} ({rating}/5)
                 </span>
             </div>
         </InteractiveCard>
-    )
+    );
 }
+

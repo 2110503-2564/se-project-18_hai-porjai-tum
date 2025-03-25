@@ -1,7 +1,7 @@
 div.card {
     width: 260px;
     height: 320px;
-    background: white;
+    background: rgb(29, 29, 29);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 12px;
     overflow: hidden;
