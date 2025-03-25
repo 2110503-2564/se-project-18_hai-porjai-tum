@@ -3,7 +3,7 @@ import Link from "next/link";
 import Card from "./Card";
 import React, { Suspense } from "react";
 
-export default async function VenueCatalog({ carsJson }: { carsJson: Promise<CarJson> }) {
+export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJson> }) {
     const carsJsonReady = await carsJson;
     // console.log(carsJsonReady.count)
     return (

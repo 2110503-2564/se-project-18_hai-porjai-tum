@@ -44,12 +44,6 @@ export default function Rental() {
     }, [urlModel, urlTel, urlCar, urlCid]);
     const rentItems = useSelector((state: any) => state.rentSlice.rentItems);
 
-    const carMap: Record<string, string> = {
-        Bloom: "The Bloom Pavilion",
-        Spark: "Spark Space",
-        GrandTable: "The Grand Table"
-    };
-
     // const makeRental = () => {
     //     if (car && rentDate) {
     //         const fullCarName = carMap[car] || car;
@@ -70,6 +64,14 @@ export default function Rental() {
 
     const makeRental = () => {
         if(cid && model && pickupDate && returnDate) {
+            if(pickupDate < dayjs(new Date())){
+                alert("You can not fill pickup date before this day")
+                return
+            }
+            if(returnDate < pickupDate){
+                alert("You can not fill return date before pickup date")
+                return
+            }
             const item:RentalItem = {
                 carId: cid,
                 carModel: model,
@@ -80,13 +82,13 @@ export default function Rental() {
                 returnLocation: returnLocation
             }
             dispatch(addRental(item))
-        }
+        }else alert("please fill the form correctly")
     }
 
 
     return (
         <main className="w-[100%] flex flex-col items-center space-y-4">
-            <div className="text-xl font-medium">New Rental</div>
+            <div className="text-xl font-medium">New Rental For {model}</div>
             <div className="w-fit space-y-2">
                 {/* <div className="text-md text-left text-gray-600">
                     Personal Information

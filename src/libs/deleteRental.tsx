@@ -8,4 +8,5 @@ export default async function deleteRental(id: string, token: string) {
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`)
     }
+    return response.json()
 }

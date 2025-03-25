@@ -5,10 +5,13 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { Select, MenuItem } from "@mui/material"
 import { useState } from "react"
 
-export default function LocationDateReserve({ onDateChange, onLocationChange }
-    : { onDateChange: Function, onLocationChange: Function }) {
+let count = false;
+
+export default function LocationDateReserve({ onDateChange, onLocationChange, preset }
+    : { onDateChange: Function, onLocationChange: Function, preset?: {date:Dayjs|null, location:string} }) {
     const [rentDate, setRentDate] = useState<Dayjs | null>(null)
     const [location, setLocation] = useState('BKK')
+    if(preset && !count) { setRentDate(preset.date); setLocation(preset.location); count=true}
     return (
         <div className="bg-slate-100 rounded-lg space-x-5 space-y-2 w-fit px-10 py-5 
         flex flex-row justify-center">
