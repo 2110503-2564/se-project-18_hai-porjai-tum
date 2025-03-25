@@ -34,7 +34,7 @@ interface CarItem {
     carId: string
     carModel: string
     numOfDays: number
-    assumePrice: number
+    assumePrice?: number
     pickupDate: string
     pickupLocation: string
     returnDate: string

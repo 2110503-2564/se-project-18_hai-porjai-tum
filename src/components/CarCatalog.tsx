@@ -5,7 +5,6 @@ import React, { Suspense } from "react";
 
 export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJson> }) {
     const carsJsonReady = await carsJson;
-    // console.log(carsJsonReady.count)
     return (
         <>
             <h3>Explore {carsJsonReady.count} of each cars in our catalog</h3>

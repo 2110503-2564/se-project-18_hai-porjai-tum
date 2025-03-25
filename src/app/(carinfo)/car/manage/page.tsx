@@ -1,7 +1,11 @@
-export default function ManageCars () {
+import DashboardPage from "@/components/Dashboard";
+
+export default function ManageCars ({ searchParams }: { searchParams: { [id: string]: string | undefined } }) {
     return (
-        <main className="text-center text-lg">
-            <div>Manage Your Cars</div>
+        <main>
+            <div className="text-center text-lg">Manage Your Cars</div>
+            <DashboardPage id={searchParams["id"]} name={searchParams["name"]} model={searchParams["model"]} tel={searchParams["tel"]}
+            pic={searchParams["pic"]} rate={searchParams["rate"]}/>
         </main>
     );
 }
