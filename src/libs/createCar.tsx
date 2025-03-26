@@ -1,5 +1,5 @@
 export default async function createCar(name: string, model:string, tel:string, pricePerDay:number, picture:string, token: string) {
-    const response = await fetch("https://sw2-backend.onrender.com/api/v1/cars", {
+    const response = await fetch("https://sw2-backend-backup1.onrender.com/api/v1/cars", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
