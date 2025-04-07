@@ -60,4 +60,5 @@ interface CarItem {
     email: string
     address: string
     role: string
+    payment: number
   }

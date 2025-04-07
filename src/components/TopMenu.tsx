@@ -7,7 +7,7 @@ import getUserProfile from '@/libs/getUserProfile';
 
 export default async function TopMenu() {
     const session = await getServerSession(authOptions);
-    const response :UserJson =  session ?   await getUserProfile(session.user.token) : null ;
+    // const response :UserJson =  session ?   await getUserProfile(session.user.token) : null ;
     
 
     
@@ -48,14 +48,14 @@ export default async function TopMenu() {
             {/* Right Section: User Actions */}
             
             <div className="flex items-center gap-6 ml-auto  text-white">
-                {session ? (
+                {session && session.user ? (
                     <>
                     <TopMenuItem title="Cart" pageRef="/mycart"  />
                         <TopMenuItem
-                            title={response.data.role === 'admin' ? 'Rentals' : 'My Rentals'}
+                            title={session.user.role === 'admin' ? 'Rentals' : 'My Rentals'}
                             pageRef="/myrental"
                         />
-                        { response.data.role === 'admin' && (
+                        { session.user.role === 'admin' && (
                             <TopMenuItem
                                 title="Manage Cars"
                                 pageRef="/car/manage"

@@ -12,6 +12,7 @@ export default function Banner() {
     const [hover, setHover] = useState(false);
     const router = useRouter()
     const { data: session } = useSession()
+    // console.log(session?.user.role)
 
     const cars = [
         { name: "SEDAN", image: "/img/SEDAN.png", textImage: "/img/SEDAN(1).png", price: "2564 Free" },
