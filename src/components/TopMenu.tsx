@@ -8,9 +8,9 @@ import getUserProfile from '@/libs/getUserProfile';
 export default async function TopMenu() {
     const session = await getServerSession(authOptions);
     // const response :UserJson =  session ?   await getUserProfile(session.user.token) : null ;
-    
 
-    
+
+
 
     return (
         <div
@@ -19,11 +19,11 @@ export default async function TopMenu() {
         >
             {/* Left Section: Logo */}
             <Link href="/" className="flex items-center">
-                <Image 
-                    src="/img/carlogo.png" 
-                    alt="logo" 
-                    width={30} 
-                    height={30} 
+                <Image
+                    src="/img/carlogo.png"
+                    alt="logo"
+                    width={30}
+                    height={30}
                     className="h-full w-auto"
                 />
                 {/* <span className="ml-2 text-lg font-bold text-white">Rental</span> */}
@@ -34,28 +34,28 @@ export default async function TopMenu() {
                 <li className="cursor-pointer hover:text-gray-400 px-14">Rental</li>
                 <li className="cursor-pointer flex items-center gap-1 hover:text-gray-400 ">
                     Select Car
-                    <Image 
-                        src="/img/orig.png" 
-                        alt="Dropdown Icon" 
-                        width={12} 
+                    <Image
+                        src="/img/orig.png"
+                        alt="Dropdown Icon"
+                        width={12}
                         height={12}
                     />
                 </li>
                 <li className="cursor-pointer hover:text-gray-400">About us</li>
             </ul>
-            
+
 
             {/* Right Section: User Actions */}
-            
+
             <div className="flex items-center gap-6 ml-auto  text-white">
                 {session && session.user ? (
                     <>
-                    <TopMenuItem title="Cart" pageRef="/mycart"  />
+                        <TopMenuItem title="Cart" pageRef="/mycart" />
                         <TopMenuItem
                             title={session.user.role === 'admin' ? 'Rentals' : 'My Rentals'}
                             pageRef="/myrental"
                         />
-                        { session.user.role === 'admin' && (
+                        {session.user.role === 'admin' && (
                             <TopMenuItem
                                 title="Manage Cars"
                                 pageRef="/car/manage"
@@ -64,16 +64,18 @@ export default async function TopMenu() {
                         <Link href="/api/auth/signout">
                             <div className="cursor-pointer hover:text-gray-400 text-white">Sign-Out</div>
                         </Link>
-                        <div className="flex items-center gap-2">
-                            <Image
-                                src={ "/img/log in2.png"} 
-                                alt="User Profile Picture"
-                                width={30}
-                                height={30}
-                                className="rounded-full"
-                            />
-                            <span>{session.user.name || "User"}</span>
-                        </div>
+                        <Link href="/profile">
+                            <div className="flex items-center gap-2">
+                                <Image
+                                    src={"/img/log in2.png"}
+                                    alt="User Profile Picture"
+                                    width={30}
+                                    height={30}
+                                    className="rounded-full"
+                                />
+                                <span>{session.user.name || "User"}</span>
+                            </div>
+                        </Link>
                     </>
                 ) : (
                     <>
@@ -85,7 +87,7 @@ export default async function TopMenu() {
                         </Link>
                     </>
                 )}
-              
+
             </div>
         </div>
     );

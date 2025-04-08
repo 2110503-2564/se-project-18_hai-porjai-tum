@@ -29,6 +29,6 @@ export default async function userLogIn(userEmail: string, userPassword: string)
         email: data.user.email,
         role: data.user.role,
         token: data.token, // Ensure token is included
-        payment: data.payment
+        payment: data.user.payment
     };
 }
