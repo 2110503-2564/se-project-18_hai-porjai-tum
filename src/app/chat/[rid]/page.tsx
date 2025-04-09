@@ -27,7 +27,7 @@ export default function ChatRentalPage({ params }: { params: { rid: string } }) 
         <div className="flex-1 flex flex-col relative">
           {selectedChat ? (
             <>
-              <div className="bg-gray-100 p-3 text-sm border-b">
+              <div className="bg-gray-100 p-2 text-sm border-b">
                 You created rental of <strong>{selectedChat.name}</strong> on {selectedChat.date}
               </div>
 

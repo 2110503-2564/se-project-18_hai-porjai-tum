@@ -8,7 +8,7 @@ export default function ChatPage() {
     
       <div className="flex h-screen overflow-hidden">
         
-        <p>Hello</p>
+        <p>Please select chat</p>
       </div>
     
   );

@@ -10,8 +10,8 @@ export default function ChatSelecter({ setSelectedChat }: { setSelectedChat: (ch
     {
       id: 1,
       name: "RX 7 2005",
-      lastMessage: "I have a question about engines",
-      image: "/img/Profile.png",
+      lastMessage: "I have a question about engines...",
+      image: "/img/max.jpg",
       date: "15/03/2025",
       route: "/chat/test",
       carDetail: {
@@ -22,7 +22,70 @@ export default function ChatSelecter({ setSelectedChat }: { setSelectedChat: (ch
         image: "/img/Profile.png",
       },
     },
+    {
+        id: 2,
+        name: "Nissan Gt2",
+        lastMessage: "I have a question about insurances..",
+        image: "/img/max2.jpg",
+        date: "15/03/2025",
+        route: "/chat/test2",
+        carDetail: {
+          model: "RX 7 2005",
+          owner: "Teno Onet",
+          location: "Rayong, Thailand",
+          distance: "673km",
+          image: "/img/max2.jpg",
+        },
+      },
+      {
+        id: 3,
+        name: "Volvo r2",
+        lastMessage: "I have a question about Parts..",
+        image: "/img/dept.jpg",
+        date: "15/03/2025",
+        route: "/chat/test2",
+        carDetail: {
+          model: "RX 7 2005",
+          owner: "Teno Onet",
+          location: "Rayong, Thailand",
+          distance: "673km",
+          image: "/img/max2.jpg",
+        },
+      },
+      {
+        id: 4,
+        name: "Duffy the Duck",
+        lastMessage: "Is the duck alive ?",
+        image: "/img/porjai.png",
+        date: "15/03/2025",
+        route: "/chat/admin",
+        carDetail: {
+          model: "RX 7 2005",
+          owner: "Teno Onet",
+          location: "Rayong, Thailand",
+          distance: "673km",
+          image: "/img/max2.jpg",
+        },
+      },
    
+  ]);
+  const [chats2, setChats2] = useState([
+    {
+      id: 1,
+      name: "Admin Teno",
+      lastMessage: "Talke to admin teno",
+      image: "/img/teno.jpg",
+      date: "15/03/2025",
+      route: "/chat/test3",
+      carDetail: {
+        model: "RX 7 2005",
+        owner: "Teno Onet",
+        location: "Rayong, Thailand",
+        distance: "673km",
+        image: "/img/teno.jpg",
+      },
+    },
+ 
   ]);
   
   const [selectedTab, setSelectedTab] = useState<"rental" | "admin">("rental"); // Track selected tab
@@ -69,9 +132,20 @@ export default function ChatSelecter({ setSelectedChat }: { setSelectedChat: (ch
           ))}
         </div>
       ) : (
-        <div className="p-4">
-          <p className="font-semibold">Admin section content will go here...</p>
-          {/* You can add additional admin-specific content here */}
+        <div >
+           {chats2.map((chat) => (
+            <div
+              key={chat.id}
+              onClick={() => router.push(chat.route)}
+              className="flex items-center gap-3 p-4 hover:bg-gray-200 cursor-pointer border-b"
+            >
+              <img src={chat.image} className="w-12 h-12 rounded-full" />
+              <div>
+                <div className="font-semibold">{chat.name}</div>
+                <div className="text-sm text-gray-600">{chat.lastMessage}</div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
