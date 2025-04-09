@@ -4,7 +4,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import addCar from '@/actions/addCar'
 import editCar from '@/actions/editCar'
 
-export default async function DashboardPage({id, name, model, tel, pic, rate} : {id?:string, name?:string, model?:string, tel?:string, pic?:string, rate?:string}) {
+export default async function DashboardPage({id, name, model, tel, pic, rate, tier} : {id?:string, name?:string, model?:string, tel?:string, pic?:string, rate?:string, tier?:string}) {
 
     const session = await getServerSession(authOptions)
     if(!session || !session.user.token) return null
@@ -25,7 +25,7 @@ export default async function DashboardPage({id, name, model, tel, pic, rate} : 
                 (profile.data.role=="admin")?
                 <form 
                 action={
-                    id && name && model && tel && pic && rate ? editCar : 
+                    id && name && model && tel && pic && rate && tier ? editCar : 
                     addCar}
                 >
                     <div className='text-xl text-blue-700'>Create Car Model {id}</div>
@@ -77,6 +77,29 @@ export default async function DashboardPage({id, name, model, tel, pic, rate} : 
                         defaultValue={rate ? rate : ""}
                         className='bg-white border-2 border-gray-200 rounded w-full p-2 
                         text-gray-700 focus:outline-none focus:border-blue-400'/>
+                    </div>
+                    <div className='flex items-center w-1/2 my-2'>
+                        <label className='w-auto block text-gray-700 pr-4' htmlFor='dayRate'>
+                            Tier</label>
+                        {/* <input type='text' required id="dayRate" name="dayRate" 
+                        placeholder='Daily Rate (including insurance)' 
+                        defaultValue={rate ? rate : ""}
+                        className='bg-white border-2 border-gray-200 rounded w-full p-2 
+                        text-gray-700 focus:outline-none focus:border-blue-400'/> */}
+                        <select
+                        required id="tier" name="tier"
+                        // value={age}
+                        // onChange={handleChange}
+                        className='bg-white border-2 border-gray-200 rounded w-full p-2 
+                        text-gray-700 focus:outline-none focus:border-blue-400'
+                        // defaultValue={tier ? tier : ""}
+                        >
+                            <option value={"Bronze"} selected={tier === "Bronze"}>Bronze</option>
+                            <option value={"Silver"} selected={tier === "Silver"}>Silver</option>
+                            <option value={"Gold"} selected={tier === "Gold"}>Gold</option>
+                            <option value={"Platinum"} selected={tier === "Platinum"}>Platinum</option>
+                            <option value={"Diamond"} selected={tier === "Diamond"}>Diamond</option>
+                        </select>
                     </div>
                     <button type="submit" className='bg-blue-500 hover:bg-blue-700 
                     text-white p-2 rounded'>{id ? "Update" : "Add New"} Car</button>
