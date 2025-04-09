@@ -1,20 +1,41 @@
 "use client";
 
-import getUserProfile from "@/libs/getUserProfile";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
+import getUserProfile from "@/libs/getUserProfile";
+
 function getTier(price: number) {
-    if (price < 1000) return "Bronze"
-    else if (price < 2000) return "Silver"
-    else if (price < 4000) return "Gold"
-    else if (price < 7000) return "Platinum"
-    else return "Diamond"
+    if (price < 1000) return "Bronze";
+    else if (price < 2000) return "Silver";
+    else if (price < 4000) return "Gold";
+    else if (price < 7000) return "Platinum";
+    else return "Diamond";
 }
 
 export default function ProfilePage() {
     const { data: session, status } = useSession();
-    console.log(session?.user)
-    if (status === "loading") {
+    const [profile, setProfile] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            if (session) {
+                try {
+                    const userProfile = await getUserProfile(session.user.token);
+                    // console.log(userProfile.data)
+                    setProfile(userProfile.data);
+                } catch (err: any) {
+                    console.error(err);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        };
+        fetchProfile();
+    }, [session]);
+
+    if (status === "loading" || loading) {
         return (
             <div className="flex justify-center items-center h-screen">
                 <p>Loading profile...</p>
@@ -25,12 +46,12 @@ export default function ProfilePage() {
     if (!session) {
         return (
             <div className="flex justify-center items-center h-screen">
-                <p className="text-red-500">You must be signed in to view your profile.</p>
+                <p className="text-red-500">
+                    {"You must be signed in to view your profile."}
+                </p>
             </div>
         );
     }
-
-    const { user } = session;
 
     return (
         <div className="flex flex-col items-center justify-center h-screen space-y-4">
@@ -46,15 +67,15 @@ export default function ProfilePage() {
                 <div className="w-full space-y-2">
                     <div className="flex items-center">
                         <p className="text-gray-600 font-semibold w-24">Name:</p>
-                        <p>{user?.name || "N/A"}</p>
+                        <p>{profile?.name || "N/A"}</p>
                     </div>
                     <div className="flex items-center">
                         <p className="text-gray-600 font-semibold w-24">Email:</p>
-                        <p>{user?.email || "N/A"}</p>
+                        <p>{profile?.email || "N/A"}</p>
                     </div>
                     <div className="flex items-center">
                         <p className="text-gray-600 font-semibold w-24">Tier:</p>
-                        <p>{getTier(user.payment)}</p>
+                        <p>{getTier(profile?.payment)}</p>
                     </div>
                 </div>
             </div>
