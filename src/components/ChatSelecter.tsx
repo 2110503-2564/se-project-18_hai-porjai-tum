@@ -1,7 +1,11 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function ChatSelecter({ setSelectedChat }: { setSelectedChat: (chat: any) => void }) {
+
+  const router = useRouter()
+
   const [chats, setChats] = useState([
     {
       id: 1,
@@ -9,6 +13,7 @@ export default function ChatSelecter({ setSelectedChat }: { setSelectedChat: (ch
       lastMessage: "I have a question about engines",
       image: "/img/Profile.png",
       date: "15/03/2025",
+      route: "/chat/test",
       carDetail: {
         model: "RX 7 2005",
         owner: "Teno Onet",
@@ -52,7 +57,7 @@ export default function ChatSelecter({ setSelectedChat }: { setSelectedChat: (ch
           {chats.map((chat) => (
             <div
               key={chat.id}
-              onClick={() => setSelectedChat(chat)}
+              onClick={() => router.push(chat.route)}
               className="flex items-center gap-3 p-4 hover:bg-gray-200 cursor-pointer border-b"
             >
               <img src={chat.image} className="w-12 h-12 rounded-full" />

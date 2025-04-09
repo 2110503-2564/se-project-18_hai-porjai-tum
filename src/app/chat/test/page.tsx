@@ -3,10 +3,28 @@ import { useState } from "react";
 import ChatLayout from "@/app/chat/layout"; // Assuming the layout is located here
 
 
-export default function ChatRentalPage({ params }: { params: { rid: string } }) {
+export default function ChatRentalPage() {
   const [selectedChat, setSelectedChat] = useState<any>(null); // Default value is null
   const [message, setMessage] = useState(""); // For handling input message
   const [messages, setMessages] = useState<any[]>([]); // For storing chat messages
+
+  const [chats, setChats] = useState(
+    {
+      id: 1,
+      name: "RX 7 2005",
+      lastMessage: "I have a question about engines",
+      image: "/img/Profile.png",
+      date: "15/03/2025",
+      carDetail: {
+        model: "RX 7 2005",
+        owner: "Teno Onet",
+        location: "Rayong, Thailand",
+        distance: "673km",
+        image: "/img/Profile.png",
+      },
+    },
+   
+  );
 
   // Handle sending message
   const sendMessage = () => {
@@ -20,15 +38,14 @@ export default function ChatRentalPage({ params }: { params: { rid: string } }) 
   };
 
   return (
-    <ChatLayout>
       <div className="flex h-screen overflow-hidden">
        
-        Message area
+        
         <div className="flex-1 flex flex-col relative">
-          {selectedChat ? (
+          {chats ? (
             <>
               <div className="bg-gray-100 p-3 text-sm border-b">
-                You created rental of <strong>{selectedChat.name}</strong> on {selectedChat.date}
+                You created rental of <strong>{chats.name}</strong> on {chats.date}
               </div>
 
               {/* Chat messages */}
@@ -68,15 +85,15 @@ export default function ChatRentalPage({ params }: { params: { rid: string } }) 
         </div>
 
         {/* Car detail area */}
-        {selectedChat && (
+        {chats && (
           <div className="w-[300px] bg-white border-l p-4 flex flex-col">
-            <img src={selectedChat.carDetail.image} alt="car" className="rounded-xl" />
-            <h2 className="mt-4 text-xl font-bold">{selectedChat.carDetail.model}</h2>
+            <img src={chats.carDetail.image} alt="car" className="rounded-xl" />
+            <h2 className="mt-4 text-xl font-bold">{chats.carDetail.model}</h2>
             <div className="text-gray-600 flex items-center gap-2 mt-2">
-              👤 {selectedChat.carDetail.owner}
+              👤 {chats.carDetail.owner}
             </div>
             <div className="text-gray-600 flex items-center gap-2">
-              📍 {selectedChat.carDetail.distance} away, {selectedChat.carDetail.location}
+              📍 {chats.carDetail.distance} away, {chats.carDetail.location}
             </div>
 
             {/* Buttons */}
@@ -87,6 +104,5 @@ export default function ChatRentalPage({ params }: { params: { rid: string } }) 
           </div>
         )}
       </div>
-    </ChatLayout>
   );
 }
