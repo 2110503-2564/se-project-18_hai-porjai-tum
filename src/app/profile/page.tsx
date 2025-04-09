@@ -13,18 +13,37 @@ function getTier(price: number) {
     else return "Diamond";
 }
 
+function getTierColor(tier: string) {
+    switch (tier) {
+        case "Bronze":
+            return "border-bronze-500 bg-bronze-100";
+        case "Silver":
+            return "border-silver-500 bg-silver-100";
+        case "Gold":
+            return "border-yellow-500 bg-yellow-100";
+        case "Platinum":
+            return "border-blue-500 bg-blue-100";
+        case "Diamond":
+            return "border-cyan-500 bg-cyan-100";
+        default:
+            return "border-gray-500 bg-gray-100";
+    }
+}
+
 export default function ProfilePage() {
     const { data: session, status } = useSession();
     const [profile, setProfile] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const [statusCircleColor, setStatusCircleColor] = useState("green"); // default to green (logged in)
 
     useEffect(() => {
         const fetchProfile = async () => {
             if (session) {
                 try {
                     const userProfile = await getUserProfile(session.user.token);
-                    // console.log(userProfile.data)
                     setProfile(userProfile.data);
+                    // Simulate user status (you can replace this with actual logic)
+                    setStatusCircleColor('green'); // If logged in
                 } catch (err: any) {
                     console.error(err);
                 } finally {
@@ -53,17 +72,30 @@ export default function ProfilePage() {
         );
     }
 
+    const userTier = getTier(profile?.payment);
+    const tierColor = getTierColor(userTier);
+
     return (
         <div className="flex flex-col items-center justify-center h-screen space-y-4">
             <h2 className="text-3xl font-bold">User Profile</h2>
-            <div className="w-96 p-8 bg-white rounded-lg shadow space-y-6 flex flex-col items-center">
-                <Image
-                    src="/img/user.jpg"
-                    alt="User Profile"
-                    width={96}
-                    height={96}
-                    className="rounded-full"
-                />
+            <div className={`w-96 p-8 rounded-lg shadow space-y-6 flex flex-col items-center ${tierColor}`}>
+                {/* Profile Picture with border according to tier */}
+                <div className={`border-4 rounded-full ${tierColor} p-2 relative`}>
+                    <Image
+                        src={profile?.name === "porjai" ? "/img/Profile.png" : "/img/user.jpg"}
+                        alt="User Profile"
+                        width={96}
+                        height={96}
+                        className="rounded-full"
+                    />
+                    {/* Status Circle */}
+                    <div
+                        className={`w-6 h-6 rounded-full absolute bottom-0 right-1 border-2 ${
+                            statusCircleColor === "green" ? "bg-green-500" : "bg-yellow-500"
+                        }`}
+                    ></div>
+                </div>
+
                 <div className="w-full space-y-2">
                     <div className="flex items-center">
                         <p className="text-gray-600 font-semibold w-24">Name:</p>
@@ -75,7 +107,7 @@ export default function ProfilePage() {
                     </div>
                     <div className="flex items-center">
                         <p className="text-gray-600 font-semibold w-24">Tier:</p>
-                        <p>{getTier(profile?.payment)}</p>
+                        <p>{userTier}</p>
                     </div>
                 </div>
             </div>

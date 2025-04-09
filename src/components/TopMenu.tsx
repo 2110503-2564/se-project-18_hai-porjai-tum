@@ -67,7 +67,7 @@ export default async function TopMenu() {
                         <Link href="/profile">
                             <div className="flex items-center gap-2">
                                 <Image
-                                    src={"/img/log in2.png"}
+                                    src={ (session.user.name === "porjai")?"/img/Profile.png" : "/img/user.jpg"}
                                     alt="User Profile Picture"
                                     width={30}
                                     height={30}
