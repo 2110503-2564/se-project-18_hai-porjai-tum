@@ -18,6 +18,7 @@ export default async function editCar(formData: FormData) {
         formData.get("tel") as string,
         Number(formData.get("dayRate") as string),
         formData.get("picture") as string,
+        formData.get("tier") as string,
         session.user.token
     );
 

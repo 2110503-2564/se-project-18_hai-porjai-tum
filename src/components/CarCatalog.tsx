@@ -1,9 +1,14 @@
 import Link from "next/link";
 import Card from "./Card";
+
 import React, { Suspense } from "react";
 import  getUserProfile  from "@/libs/getUserProfile";
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
 import { getServerSession } from "next-auth";
+
+
+import ChatButton from "./ChatButton"; // 👈 เพิ่มตรงนี้
+
 
 
 function getTier(price: number) {
@@ -14,6 +19,7 @@ function getTier(price: number) {
     else return "Diamond";
 }
 export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJson> }) {
+
   
 
     const session = await getServerSession(authOptions)
@@ -23,6 +29,12 @@ export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJs
     console.log(User.data.payment);
     
     
+
+
+    
+
+
+
     return (
         <div className="pt-10">
             <h3 className="text-3xl font-bold text-lg text-white text-center">
@@ -54,6 +66,8 @@ export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJs
                     </Link>
                 ))}
             </div>
+
+            <ChatButton /> {/* 👈 แทรกปุ่มตรงนี้ */}
         </div>
     );
 }
