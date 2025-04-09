@@ -6,7 +6,7 @@ interface CarItem {
   pricePerDay: number
   picture: string
   rating:number
-  
+  tier: string
   }
 
   

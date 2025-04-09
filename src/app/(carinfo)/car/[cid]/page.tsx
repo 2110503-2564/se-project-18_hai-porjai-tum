@@ -50,6 +50,9 @@ export default async function CarDetailPage({ params }: { params: { cid: string 
                         <p className="text-lg">
                             <span className="font-semibold">Price / Day:</span> {CarDetail.data.pricePerDay}
                         </p>
+                        <p className="text-lg">
+                            <span className="font-semibold">Tier:</span> {CarDetail.data.tier}
+                        </p>
                     </div>
 
                     {/* Rating Section */}
