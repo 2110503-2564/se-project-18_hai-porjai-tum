@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Card from "./Card";
-import React, { Suspense } from "react";
+import React from "react";
+import ChatButton from "./ChatButton"; // 👈 เพิ่มตรงนี้
 
 export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJson> }) {
     const carsJsonReady = await carsJson;
-    
+
     return (
         <div className="pt-10">
             <h3 className="text-3xl font-bold text-lg text-white text-center">
@@ -36,6 +37,8 @@ export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJs
                     </Link>
                 ))}
             </div>
+
+            <ChatButton /> {/* 👈 แทรกปุ่มตรงนี้ */}
         </div>
     );
 }
