@@ -43,6 +43,8 @@ export default function CardPanel() {
                                     carName={CarItem.model}
                                     imgSrc={CarItem.picture}
                                     rating={5} 
+                                    tier ={CarItem.tier}
+                                    userTier={"Diamond"}
                                 />
                             </Link>
                         </div>

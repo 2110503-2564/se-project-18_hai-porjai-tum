@@ -96,7 +96,7 @@ export default async function CarDetailPage({ params }: { params: { cid: string 
                             href={`/car/${CarItem.id}`}
                             className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] h-[100%] p-2 sm:p-4 md:p-4 lg:p-8"
                         >
-                            <Card carName={CarItem.model} imgSrc={CarItem.picture} rating={CarItem.rating} />
+                            <Card carName={CarItem.model} imgSrc={CarItem.picture} rating={CarItem.rating} tier = {CarItem.tier}  userTier="Diamond"/>
                         </Link>
                     ))}
                 </div>

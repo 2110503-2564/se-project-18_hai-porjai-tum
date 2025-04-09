@@ -1,9 +1,27 @@
 import Link from "next/link";
 import Card from "./Card";
 import React, { Suspense } from "react";
+import  getUserProfile  from "@/libs/getUserProfile";
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
+import { getServerSession } from "next-auth";
 
+
+function getTier(price: number) {
+    if (price < 1000) return "Bronze";
+    else if (price < 2000) return "Silver";
+    else if (price < 4000) return "Gold";
+    else if (price < 7000) return "Platinum";
+    else return "Diamond";
+}
 export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJson> }) {
-    const carsJsonReady = await carsJson;
+  
+
+    const session = await getServerSession(authOptions)
+    if(!session || !session.user.token) return null
+    const [carsJsonReady, User] = await Promise.all([carsJson, getUserProfile(session.user.token)]);
+    const Tier = getTier(User.data.payment)
+    console.log(User.data.payment);
+    
     
     return (
         <div className="pt-10">
@@ -32,7 +50,7 @@ export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJs
                         href={`/car/${CarItem.id}`}
                         className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8"
                     >
-                        <Card carName={CarItem.model} imgSrc={CarItem.picture} rating={CarItem.rating} />
+                        <Card carName={CarItem.name} imgSrc={CarItem.picture} rating={CarItem.rating}  tier ={CarItem.tier} userTier = {Tier} />
                     </Link>
                 ))}
             </div>
