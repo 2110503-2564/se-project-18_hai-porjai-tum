@@ -62,6 +62,7 @@ export default function MyRental() {
                             <div className="text-md">Pickup Date: {rentalItem.pickupDate}</div>
                             <div className="text-md">Return Location: {rentalItem.returnLocation}</div>
                             <div className="text-md">Return Date: {rentalItem.returnDate}</div>
+
                         </div>
                         <div>
                             <Link href={`/rental/manage?id=${rentalItem._id}`}>
