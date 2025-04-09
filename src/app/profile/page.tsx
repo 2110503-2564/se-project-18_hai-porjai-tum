@@ -1,5 +1,6 @@
 "use client";
 
+import getUserProfile from "@/libs/getUserProfile";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 function getTier(price: number) {
@@ -9,11 +10,10 @@ function getTier(price: number) {
     else if (price < 7000) return "Platinum"
     else return "Diamond"
 }
+
 export default function ProfilePage() {
     const { data: session, status } = useSession();
     console.log(session?.user)
-    const price = session?.user.payment as any
-
     if (status === "loading") {
         return (
             <div className="flex justify-center items-center h-screen">
@@ -54,7 +54,7 @@ export default function ProfilePage() {
                     </div>
                     <div className="flex items-center">
                         <p className="text-gray-600 font-semibold w-24">Tier:</p>
-                        <p>{getTier(price)}</p>
+                        <p>{getTier(user.payment)}</p>
                     </div>
                 </div>
             </div>
