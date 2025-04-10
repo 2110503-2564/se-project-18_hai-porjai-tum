@@ -1,15 +1,12 @@
-'use client';
-
-import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
-
-const socket: Socket = io('https://sw2-backend-backup1.onrender.com'); // Update with your server URL if different
+"use client";
+import { useState } from "react";
+import ChatLayout from "@/app/chat/layout"; // Assuming the layout is located here
 
 export default function ChatRentalPage() {
-  const [selectedChat, setSelectedChat] = useState<any>(null);
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<any[]>([]);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [selectedChat, setSelectedChat] = useState<any>(null); // Default value is null
+  const [message, setMessage] = useState(""); // For handling input message
+  const [messages, setMessages] = useState<any[]>([]); // For storing chat messages
+  const [selectedFile, setSelectedFile] = useState<File | null>(null); // State to store selected file
 
   const [chats, setChats] = useState({
     id: 1,
@@ -23,50 +20,31 @@ export default function ChatRentalPage() {
       location: "Samutprakan, Thailand",
       distance: "0.05km",
       image: "/img/teno.jpg",
-      profileImage: "/img/carlogo.png",
+      profileImage: "/img/carlogo.png", // Profile image
     },
   });
 
-  // Set up socket connection
-  useEffect(() => {
-    const handleMessage = (incomingMessage: any) => {
-      // Prevent duplicating messages sent by this client
-      if (incomingMessage.sender !== "user") {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { sender: "admin", content: incomingMessage.content },
-        ]);
-      }
-      
-}
-
-  
-    socket.on("chat message", handleMessage);
-    return () => {
-      socket.off("chat message");
-    };
-  }, []);
-  
-
+  // Handle sending message
   const sendMessage = () => {
     if (message.trim() !== "") {
-      // Send to server
-      socket.emit("chat message", message);
-
-      // Append locally for the sender
-     
-      setMessage("");
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { sender: "user", content: message },
+      ]);
+      setMessage(""); // Reset input field
     }
   };
 
+  // Handle file selection
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
+      setSelectedFile(file); // Store the selected file
       console.log("Selected file:", file);
     }
   };
 
+  // Trigger file input click
   const openFileExplorer = () => {
     document.getElementById("file-input")?.click();
   };
@@ -80,6 +58,7 @@ export default function ChatRentalPage() {
               You matched with <strong>{chats.name}</strong> on {chats.date}
             </div>
 
+            {/* Chat messages */}
             <div className="flex-1 p-4 overflow-y-auto bg-white flex flex-col space-y-3">
               {messages.map((msg, index) => (
                 <div
@@ -87,11 +66,13 @@ export default function ChatRentalPage() {
                   className={`p-3 rounded-lg ${
                     msg.sender === "user" ? "bg-blue-400 text-white self-end" : "bg-gray-200"
                   }`}
+                  style={{ wordWrap: "break-word" }}
                 >
                   {msg.content}
                 </div>
               ))}
 
+              {/* Display selected file (optional) */}
               {selectedFile && (
                 <div className="p-3 rounded-lg bg-gray-100 mt-4">
                   <p>Selected File: {selectedFile.name}</p>
@@ -104,6 +85,7 @@ export default function ChatRentalPage() {
               )}
             </div>
 
+            {/* Input + send button */}
             <div className="p-4 border-t flex items-center gap-3 bg-white mb-12">
               <button
                 className="text-green-500 border p-2 rounded-full hover:bg-green-100"
@@ -112,11 +94,12 @@ export default function ChatRentalPage() {
                 📎
               </button>
 
+              {/* Hidden file input */}
               <input
                 id="file-input"
                 type="file"
                 className="hidden"
-                accept="image/*"
+                accept="image/*" // Allow image files only
                 onChange={handleFileSelect}
               />
 
@@ -141,10 +124,14 @@ export default function ChatRentalPage() {
         )}
       </div>
 
+      {/* Car detail area */}
       {chats && (
         <div className="w-[300px] bg-white border-l p-4 flex flex-col">
+          {/* Car Image Container */}
           <div className="relative">
             <img src={chats.carDetail.image} alt="car" className="rounded-xl" />
+            
+            {/* Profile Image */}
             <img
               src={chats.carDetail.profileImage}
               alt="profile"
@@ -160,6 +147,7 @@ export default function ChatRentalPage() {
             📍 {chats.carDetail.distance} away, {chats.carDetail.location}
           </div>
 
+          {/* Buttons */}
           <div className="mt-auto flex justify-between gap-2 pt-4 mb-12">
             <button className="w-1/2 py-2 border rounded-xl hover:bg-gray-100">Cancel</button>
             <button className="w-1/2 py-2 border rounded-xl text-red-500 hover:bg-red-50">Report</button>
