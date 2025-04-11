@@ -34,10 +34,10 @@ export default function Banner({ cars }: { cars: CarItem[] }) {
           Your personalized car recommendation experience starts here. Swipe, explore, and find your perfect match.
         </p>
         <button 
-          onClick={() => router.push('/car')} 
+          onClick={() => router.push('/home')} 
           className="mt-4 px-6 py-3 bg-red-600 text-white rounded-full shadow hover:bg-orange-800 transition"
         >
-          Explore Catalog
+          Ready
         </button>
       </div>
 

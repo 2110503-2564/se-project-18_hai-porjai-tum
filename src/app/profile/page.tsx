@@ -152,13 +152,13 @@ export default function ProfilePage() {
 
     return (
         <div className="flex flex-col bg-[url('/img/tinderbg.png')] bg-cover bg-center  items-center justify-center min-h-screen px-4 py-10 space-y-6 ">
-            <h2 className="text-3xl font-bold text-white">User Profile</h2>
+            <h2 className="text-3xl font-bold text-gray-800">User Profile</h2>
             <div
                 className={`w-full max-w-md p-6 rounded-2xl border ${tierStyle.border} bg-gray-900  transition duration-300 hover:scale-[1.02]`}
             >
                 <div className="flex flex-col items-center space-y-4">
                 <Image
-    src={profile?.name === "porjai" ? "/img/Profile.png" : "/img/user.jpg"}
+    src={profile?.name === "porjai" ? "/img/popop2.jpeg" : "/img/user.jpg"}
     alt="User Profile"
     width={100}
     height={100}
