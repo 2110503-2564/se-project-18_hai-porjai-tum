@@ -9,7 +9,7 @@ export default function Car() {
     const carsPromise = getCars()
     return (
         
-        <main className="relative w-full h-screen bg-[url('/img/Component.png')] bg-cover bg-center">
+        <main className="relative w-full bg-[url('/img/tinderbg.png')] bg-cover bg-center">
             
             <Suspense fallback={<p>Loading Cars...<LinearProgress /></p>}>
                 <CarCatalog carsJson={carsPromise} />
