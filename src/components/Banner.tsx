@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
 
 export default function Banner() {
-    const covers = ['/img/Component.png', '/img/Component.png', '/img/Component.png', '/img/Component.png']
+    const covers = ['/img/tinderbg.png', '/img/tinderbg.png', '/img/tinderbg.png', '/img/tinderbg.png']
     const [index, setIndex] = useState(0)
     const [hover, setHover] = useState(false);
     const router = useRouter()
