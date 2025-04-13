@@ -17,9 +17,9 @@ export default function AboutPage() {
     
     const mockContributors: User[] = [
       { id: '1', name: 'orway', role: 'UI,', avatar: '/img/popop2.jpeg' },
-      { id: '2', name: 'tenouuu', role: 'admin', avatar: '/img/user.jpg' },
-      { id: '3', name: 'Siphax', role: 'admin' },
-      { id: '4', name: 'Jokungz', role: 'admin', avatar: '/img/user.jpg' },
+      { id: '2', name: 'tenouuu', role: 'admin', avatar: '/img/glass.jpg' },
+      { id: '3', name: 'Siphax', role: 'admin', avatar: '/img/max.jpg' },
+      { id: '4', name: 'Jokungz', role: 'admin', avatar: '/img/glass.jpg' },
       { id: '5', name: 'tahto', role: 'admin', avatar: '/img/user.jpg' },
       { id: '6', name: 'TRIPATROPATRALALALIRILIRATUNGTUN', role: 'admin', avatar: '/img/user.jpg' },
       { id: '7', name: 'qwert_ato', role: 'admin', avatar: '/img/user.jpg' },
@@ -39,6 +39,7 @@ export default function AboutPage() {
               alt={admin.name}
               width={100}
               height={100}
+              
               className="rounded-full border-4 border-white shadow-md mb-4"
             />
             <h2 className="text-xl font-semibold">{admin.name}</h2>

@@ -2,6 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import TopSpenders from "../topspender/page";
 import Image from "next/image";
 import getUserProfile from "@/libs/getUserProfile";
 import getRentals from "@/libs/getRentals";
@@ -272,8 +273,11 @@ export default function ProfilePage() {
                     </div>
                 </div>
                 
+                
             )}
+          
         </div>
+        
         
     );
 }
