@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import getUserProfile from "@/libs/getUserProfile";
 import getRentals from "@/libs/getRentals";
+import { useRouter } from "next/navigation";
+
 import dayjs from "dayjs";
 
 
@@ -100,6 +102,8 @@ export default function ProfilePage() {
     const [statusCircleColor, setStatusCircleColor] = useState("green");
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [recentRental, setRecentRental] = useState<RentalItem | null>(null);
+    const router = useRouter();
+
 
 
     useEffect(() => {
@@ -213,6 +217,8 @@ export default function ProfilePage() {
                                 )}
                             </div>
                         </div>
+                      
+ 
 
 
 
@@ -235,6 +241,15 @@ export default function ProfilePage() {
                     Edit Profile
                 </button>
             </div>
+             {/* */}
+    <div className="mt-4">
+        <button
+            onClick={() => window.location.href = "/add-balance"}
+            className="w-full px-4 py-2 bg-red-500 text-white rounded-xl shadow hover:bg-orange-600 transition"
+        >
+            Top Up Balance
+        </button>
+    </div>
 
             {/* Modal */}
             {isModalOpen && (
@@ -256,7 +271,9 @@ export default function ProfilePage() {
                         </div>
                     </div>
                 </div>
+                
             )}
         </div>
+        
     );
 }
