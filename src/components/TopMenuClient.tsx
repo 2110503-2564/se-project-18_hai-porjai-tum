@@ -95,9 +95,14 @@ export default function TopMenuClient({ session }: Props) {
 
       {/* Menu Items */}
       <ul className="left-8 flex items-center gap-8 relative">
-        <li className="text-white cursor-pointer hover:text-gray-400 pr-6 border-r border-red-500">
-          Rental
-        </li>
+      <li className="pr-6 border-r border-red-500">
+  <Link href="/promo">
+    <div className="text-white cursor-pointer hover:text-gray-400">
+      Promos
+    </div>
+  </Link>
+</li>
+
 
         {/* Privilege Dropdown */}
         <li className="relative pr-6 border-r border-red-500">
@@ -126,9 +131,14 @@ export default function TopMenuClient({ session }: Props) {
           )}
         </li>
 
-        <li className="text-white cursor-pointer hover:text-gray-400 pr-6 border-r border-red-500">
-          About us
-        </li>
+        <li className="pr-6 border-r border-red-500">
+  <Link href="/about">
+    <div className="text-white cursor-pointer hover:text-gray-400">
+      About us
+    </div>
+  </Link>
+</li>
+
       </ul>
 
 
@@ -169,18 +179,24 @@ export default function TopMenuClient({ session }: Props) {
 
               return (
                 <Link href="/profile">
-                  <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm ${style.badge} ${style.shadow}`}>
+                  <div className={`flex items-center gap-3 px-3 py-1 rounded-full text-sm ${style.badge} ${style.shadow}`}>
                     <Image
                       src={session.user.name === 'porjai' ? '/img/popop2.jpeg' : '/img/user.jpg'}
                       alt="User Profile"
-                      width={26}
-                      height={26}
+                      width={36}
+                      height={36}
                       className="rounded-full border border-white"
                     />
-                    <span>{session.user.name || 'User'}</span>
+                    <div className="flex flex-col items-start leading-tight">
+                      <span className="font-semibold">{session.user.name || 'User'}</span>
+                      <span className="text-xs bg-black/20 px-2 py-0.5 rounded-full">
+                         {session.user.balance?.toLocaleString() || '0'} THB
+                      </span>
+                    </div>
                   </div>
                 </Link>
               );
+              
             })()}
 
           </>
