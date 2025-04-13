@@ -23,17 +23,17 @@ export default async function CarDetailPage({ params }: { params: { cid: string 
     const Catalog = await getCars(); // Fetch other cars from the catalog
 
     return (
-        <main className="relative w-full min-h-screen bg-gray-800 flex justify-center items-center">
+        <main className="relative w-full min-h-screen bg-gray-800 flex justify-center items-center py-10">
             {/* Car Details Card */}
-            <div className="relative bg-gray-100 rounded-lg shadow-lg w-[90%] sm:w-[60%] md:w-[40%] p-5">
+            <div className="relative bg-white rounded-lg shadow-xl w-[90%] sm:w-[70%] md:w-[50%] p-5 transition-transform transform hover:scale-105 duration-300 ease-in-out">
                 {/* Car Image */}
-                <div className="relative w-full h-64 rounded-lg overflow-hidden">
+                <div className="relative w-full h-64 rounded-lg overflow-hidden mb-4">
                     <Image
                         src={CarDetail.data.picture}
-                        alt="Product Picture"
+                        alt={`${CarDetail.data.name} image`}
                         layout="fill"
                         objectFit="cover"
-                        className="rounded-t-lg"
+                        className="rounded-t-lg transition-all transform hover:scale-105 duration-300 ease-in-out"
                     />
                 </div>
 
@@ -43,12 +43,12 @@ export default async function CarDetailPage({ params }: { params: { cid: string 
                     <p className="text-sm text-gray-600 italic mb-4">{CarDetail.data.model}</p>
 
                     {/* Specifications */}
-                    <div className="space-y-2">
+                    <div className="space-y-2 mb-4">
                         <p className="text-lg">
                             <span className="font-semibold">Tel:</span> {CarDetail.data.tel}
                         </p>
                         <p className="text-lg">
-                            <span className="font-semibold">Price / Day:</span> {CarDetail.data.pricePerDay}
+                            <span className="font-semibold">Price / Day:</span> ${CarDetail.data.pricePerDay}
                         </p>
                         <p className="text-lg">
                             <span className="font-semibold">Tier:</span> {CarDetail.data.tier}
@@ -76,27 +76,25 @@ export default async function CarDetailPage({ params }: { params: { cid: string 
 
                     {/* Rental Button */}
                     <Link href={`/rental?id=${params.cid}&model=${CarDetail.data.model}`}>
-                        <button className="block w-full mt-5 py-2 bg-red-600 text-white rounded-lg shadow-lg text-center text-lg font-semibold hover:bg-orange-600 transition-all duration-300">
+                        <button className="block w-full mt-5 py-2 bg-red-600 text-white rounded-lg shadow-lg text-center text-lg font-semibold hover:bg-orange-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-red-500">
                             Rent This Car
                         </button>
                     </Link>
                 </div>
             </div>
 
-
-
             {/* Catalog Section */}
-            <div className="p-10 bg-gray-300 rounded-t-lg">
-                <h2 className="text-xl font-bold text-gray-700">Other Cars in the Catalog</h2>
-                <div className="flex flex-wrap justify-around mt-5">
+            <div className="mt-10 p-10 bg-gray-100 rounded-lg w-full sm:w-[70%] md:w-[80%] mx-auto">
+                <h2 className="text-xl font-bold text-gray-700 mb-5">Other Cars in the Catalog</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     {/* Display Only 4 Cards */}
                     {Catalog.data.slice(0, 4).map((CarItem: CarItem) => (
                         <Link
                             key={CarItem.id}
                             href={`/car/${CarItem.id}`}
-                            className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] h-[100%] p-2 sm:p-4 md:p-4 lg:p-8"
+                            className="w-full flex justify-center"
                         >
-                            <Card carName={CarItem.model} imgSrc={CarItem.picture} rating={CarItem.rating} tier = {CarItem.tier}  userTier="Diamond"/>
+                            <Card carName={CarItem.model} imgSrc={CarItem.picture} rating={CarItem.rating} tier={CarItem.tier} userTier="Diamond" />
                         </Link>
                     ))}
                 </div>
