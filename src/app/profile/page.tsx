@@ -12,7 +12,7 @@ function getTier(price: number) {
     if (price < 1000) return "Bronze";
     else if (price < 2000) return "Silver";
     else if (price < 4000) return "Gold";
-    else if (price < 7000) return "Platinum";
+    else if (price < 7000) return "Ruby";
     else return "Diamond";
 }
 
@@ -42,7 +42,7 @@ function getTierStyle(tier: string) {
                 shadow: "shadow-[0_0_12px_rgba(234,179,8,0.6)]",
                 perks: ["24/7 Support", "Gold-only Discounts", "Free Shipping"],
             };
-        case "Platinum":
+        case "Ruby":
             return {
                 border: "border-blue-200",
                 bg: "bg-blue-50",
@@ -110,14 +110,14 @@ export default function ProfilePage() {
                     const rentalsRes = await getRentals(session.user.token);
                     setProfile(userProfile.data);
                     setStatusCircleColor('green');
-        
+
                     if (rentalsRes?.data?.length) {
                         const sortedRentals = rentalsRes.data.sort((a: RentalItem, b: RentalItem) =>
                             dayjs(b.pickupDate).diff(dayjs(a.pickupDate))
                         );
-                        setRecentRental(sortedRentals[0]); 
+                        setRecentRental(sortedRentals[0]);
                     }
-        
+
                 } catch (err: any) {
                     console.error(err);
                 } finally {
@@ -125,7 +125,7 @@ export default function ProfilePage() {
                 }
             }
         };
-        
+
         fetchProfile();
     }, [session]);
 
@@ -157,13 +157,13 @@ export default function ProfilePage() {
                 className={`w-full max-w-md p-6 rounded-2xl border ${tierStyle.border} bg-gray-900  transition duration-300 hover:scale-[1.02]`}
             >
                 <div className="flex flex-col items-center space-y-4">
-                <Image
-    src={profile?.name === "porjai" ? "/img/popop2.jpeg" : "/img/user.jpg"}
-    alt="User Profile"
-    width={100}
-    height={100}
-    className={`rounded-full border-4 ${tierStyle.shadow} shadow`}
-/>
+                    <Image
+                        src={profile?.name === "porjai" ? "/img/popop2.jpeg" : "/img/user.jpg"}
+                        alt="User Profile"
+                        width={100}
+                        height={100}
+                        className={`rounded-full border-4 ${tierStyle.shadow} shadow`}
+                    />
 
 
                     <div className="text-center space-y-1">
@@ -191,33 +191,33 @@ export default function ProfilePage() {
                             <span>${profile?.payment?.toLocaleString() || "0"}</span>
                         </div>
                         <div className="relative w-full mt-4 group">
-  <button className="px-4 py-2 bg-red-400 text-white rounded-lg shadow hover:bg-orange-500 transition font-medium">
-    Recent Rental
-  </button>
+                            <button className="px-4 py-2 bg-red-400 text-white rounded-lg shadow hover:bg-orange-500 transition font-medium">
+                                Recent Rental
+                            </button>
 
-  {/* Hover Box */}
-  <div className="absolute left-0 top-full mt-2 w-full z-10 hidden group-hover:flex flex-col bg-white p-4 rounded-xl shadow-lg border border-orange-200">
-    {recentRental ? (
-      <>
-        <div className="text-sm font-semibold text-gray-700">
-          {recentRental.car?.model}
-        </div>
-        <div className="text-xs text-gray-600">
-          {dayjs(recentRental.pickupDate).format("MMM D")} → {dayjs(recentRental.returnDate).format("MMM D")}
-        </div>
-        <div className="text-xs text-gray-600">Location: {recentRental.pickupLocation}</div>
-        <div className="text-xs text-gray-600">Price: ${recentRental.assumePrice}</div>
-      </>
-    ) : (
-      <p className="text-xs text-gray-500">No recent rental data</p>
-    )}
-  </div>
-</div>
+                            {/* Hover Box */}
+                            <div className="absolute left-0 top-full mt-2 w-full z-10 hidden group-hover:flex flex-col bg-white p-4 rounded-xl shadow-lg border border-orange-200">
+                                {recentRental ? (
+                                    <>
+                                        <div className="text-sm font-semibold text-gray-700">
+                                            {recentRental.car?.model}
+                                        </div>
+                                        <div className="text-xs text-gray-600">
+                                            {dayjs(recentRental.pickupDate).format("MMM D")} → {dayjs(recentRental.returnDate).format("MMM D")}
+                                        </div>
+                                        <div className="text-xs text-gray-600">Location: {recentRental.pickupLocation}</div>
+                                        <div className="text-xs text-gray-600">Price: ${recentRental.assumePrice}</div>
+                                    </>
+                                ) : (
+                                    <p className="text-xs text-gray-500">No recent rental data</p>
+                                )}
+                            </div>
+                        </div>
 
-           
+
 
                     </div>
-                    
+
                 </div>
             </div>
 

@@ -20,21 +20,22 @@ function getProgressBarColor(rating: number): string {
 function getHoverShadowColor(tier: string): string {
     switch (tier) {
         case "Bronze":
-            return "shadow-[0_0_45px_rgba(165,42,42,0.8)]";
+            return "shadow-[0_0_45px_rgba(200,120,10,0.8)]"; // Deep bronze
         case "Silver":
-            return "shadow-[0_0_45px_rgba(192,192,192,0.8)]";
+            return "shadow-[0_0_45px_rgba(140,140,140,0.85)]"; // rich silver shadow
         case "Gold":
-            return "shadow-[0_0_45px_rgba(255,215,0,0.8)]";
-        case "Platinum":
-            return "shadow-[0_0_45px_rgba(173,216,230,0.8)]";
+            return "shadow-[0_0_45px_rgba(255,223,0,0.85)]"; // Lighter Gold
+        case "Ruby":
+            return "shadow-[0_0_45px_rgba(200,50,70,0.9)]"; // Luxurious Ruby (darker and more refined)
         case "Diamond":
-            return "shadow-[0_0_45px_rgba(135,206,250,0.8)]";
+            return "shadow-[0_0_45px_rgba(10,206,250,0.8)]"; // Cyan-inspired diamond
         default:
-            return "shadow-[0_0_45px_rgba(128,128,128,0.5)]";
+            return "shadow-[0_0_45px_rgba(128,128,128,0.5)]"; // Default shadow
     }
+
 }
 function canAccessTier(userTier: string, carTier: string): boolean {
-    const tierOrder = ["Bronze", "Silver", "Gold", "Platinum", "Diamond"];
+    const tierOrder = ["Bronze", "Silver", "Gold", "Ruby", "Diamond"];
     const userIndex = tierOrder.indexOf(userTier);
     const carIndex = tierOrder.indexOf(carTier);
     return userIndex >= carIndex;
@@ -58,11 +59,11 @@ export default function Card({
     const shadowColor = getHoverShadowColor(tier); // Use the shadow color all the time
 
     return (
-        <InteractiveCard className={`bg-gray-300 border border-gray-300 rounded-lg overflow-hidden`}>
+        <InteractiveCard className={`bg-gray-300 border border-gray-300 rounded-lg overflow-hidden`} isLocked={isLocked}>
 
             {/* Image Section */}
             <div className="w-full h-[70%] relative rounded-t-lg">
-                <Image 
+                <Image
                     src={imgSrc}
                     alt={carName}
                     fill={true}
@@ -82,23 +83,21 @@ export default function Card({
                     {carName}
 
                     {isLocked && (
-                         <Image
-                         src="/img/lock-icon-11.png"
-                         alt="logo"
-                         width={20}
-                         height={20}
-                         
-                     />
+                        <Image
+                            src="/img/lock-icon-11.png"
+                            alt="logo"
+                            width={20}
+                            height={20}
+                        />
                     )}
-                     
-                    
+
                 </h3>
 
                 {/* Progress Bar */}
                 <div className="w-full bg-gray-300 h-2 rounded-full overflow-hidden mt-2">
-                    <div 
-                        className={`${getProgressBarColor(rating)} h-full transition-all`} 
-                        style={{ width: `${(rating / 5) * 100}%` }} 
+                    <div
+                        className={`${getProgressBarColor(rating)} h-full transition-all`}
+                        style={{ width: `${(rating / 5) * 100}%` }}
                     />
                 </div>
 
