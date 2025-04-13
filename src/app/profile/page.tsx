@@ -167,7 +167,7 @@ export default function ProfilePage() {
                         alt="User Profile"
                         width={100}
                         height={100}
-                        className={`rounded-full border-4 ${tierStyle.shadow} shadow`}                
+                        className={`rounded-full border-4 ${tierStyle.shadow} shadow`}
                     />
 
 
