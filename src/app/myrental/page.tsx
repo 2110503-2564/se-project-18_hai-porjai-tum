@@ -8,7 +8,11 @@ import { LinearProgress } from "@mui/material"
 export default async function MyRentalPage() {
     return (
         <main className="pt-2">
+<<<<<<< HEAD
+                <h1 className="text-3xl font-medium flex justify-center">Your Rental</h1>
+=======
                 <h1 className="text-3xl font-medium flex justify-center">Your Rental Tickets</h1>
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6
                 <MyRental/>
         </main>
     )

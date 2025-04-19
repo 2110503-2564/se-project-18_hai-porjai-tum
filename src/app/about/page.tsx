@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+export default function About() {
+    return (
+        <main>
+            <div className='text-x1 font-serif'>About Us</div>
+        </main>
+    )
+}
+=======
 'use client'
 
 import Image from 'next/image';
@@ -50,3 +59,4 @@ export default function AboutPage() {
     </div>
   );
 }
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6

@@ -1,4 +1,3 @@
-
 import getCars from "@/libs/getCars";
 import CarCatalog from "@/components/CarCatalog";
 import Footer from "@/components/Footer";

@@ -5,6 +5,9 @@
 body {
   color: rgb(var(--foreground-rgb));
   margin-top: 50px;
+<<<<<<< HEAD
+}
+=======
 }
 .ticket-shape {
   position: relative;
@@ -34,3 +37,4 @@ body {
   top: 50%;
   transform: translateY(-50%);
 }
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6

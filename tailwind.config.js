@@ -2,6 +2,22 @@
 module.exports = {
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+<<<<<<< HEAD
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}"
+  ],
+  theme: {
+    extend: {
+      extend: {
+        fontFamily: {
+          poppins: ["Poppins", "sans-serif"],
+        },
+      },
+    },
+  },
+  plugins: [],
+}
+
+=======
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -25,3 +41,4 @@ module.exports = {
   },
   plugins: [],
 };
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6

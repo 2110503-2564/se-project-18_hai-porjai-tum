@@ -17,7 +17,10 @@ export default async function addCar(formData: FormData) {
         formData.get("tel") as string,
         Number(formData.get("dayRate") as string),
         formData.get("picture") as string,
+<<<<<<< HEAD
+=======
         formData.get("tier") as string,
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6
         session.user.token
     );
 

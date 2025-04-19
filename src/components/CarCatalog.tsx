@@ -1,5 +1,12 @@
 import Link from "next/link";
 import Card from "./Card";
+<<<<<<< HEAD
+import React, { Suspense } from "react";
+
+export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJson> }) {
+    const carsJsonReady = await carsJson;
+    
+=======
 
 import React, { Suspense } from "react";
 import getUserProfile from "@/libs/getUserProfile";
@@ -37,6 +44,7 @@ export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJs
     const Tier = getTier(User.data.payment)
     console.log(User.data.payment);
 
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6
     return (
         <div className="pt-10">
             <h3 className="text-3xl font-bold text-lg text-white text-center">
@@ -58,6 +66,18 @@ export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJs
                     padding: "10px",
                 }}
             >
+<<<<<<< HEAD
+                {carsJsonReady.data.map((CarItem: CarItem) => (
+                    <Link
+                        key={CarItem.id}
+                        href={`/car/${CarItem.id}`}
+                        className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8"
+                    >
+                        <Card carName={CarItem.model} imgSrc={CarItem.picture} rating={CarItem.rating} />
+                    </Link>
+                ))}
+            </div>
+=======
                 {carsJsonReady.data.map((CarItem: CarItem) => {
                     const canAccess = tierRank(Tier) >= tierRank(CarItem.tier);
 
@@ -83,6 +103,7 @@ export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJs
             </div>
 
             <ChatButton /> {/* 👈 แทรกปุ่มตรงนี้ */}
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6
         </div>
     );
 }

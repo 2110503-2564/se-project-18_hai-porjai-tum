@@ -6,11 +6,17 @@ import { motion } from "framer-motion";
 export default function InteractiveCard({
     children,
     className = '',
+<<<<<<< HEAD
+}: {
+    children: React.ReactNode;
+    className?: string;
+=======
     isLocked = false,
 }: {
     children: React.ReactNode;
     className?: string;
     isLocked?: boolean;
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6
 }) {
     const [isDragging, setIsDragging] = useState(false);
 
@@ -35,6 +41,13 @@ export default function InteractiveCard({
             drag // Enables drag functionality
             onDragStart={() => setIsDragging(true)} // Set dragging state when dragging starts
             onDragEnd={() => setIsDragging(false)} // Reset dragging state when dragging ends
+<<<<<<< HEAD
+            whileHover={{
+                scale: 1.05, // Slight zoom effect on hover
+                rotate: [0, -1, 1, -1, 0], // Shaking effect
+                transition: { duration: 0.4, repeat: Infinity, repeatType: "loop" },
+            }}
+=======
             whileHover={
                 !isLocked
                     ? {
@@ -44,6 +57,7 @@ export default function InteractiveCard({
                     }
                     : undefined
             }
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6
             style={{
                 cursor: isDragging ? "grabbing" : "grab", // Change the cursor to indicate draggable
             }}
