@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {type Session} from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
@@ -29,3 +30,9 @@ const options: AuthOptions = {
 
 
 export default NextAuth(options);
+=======
+import NextAuth from "next-auth";
+import { authOptions } from "./authOptions";
+const handler = NextAuth(authOptions)
+export { handler as GET, handler as POST };
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6

@@ -5,4 +5,36 @@
 body {
   color: rgb(var(--foreground-rgb));
   margin-top: 50px;
+<<<<<<< HEAD
 }
+=======
+}
+.ticket-shape {
+  position: relative;
+  border-radius: 12px;
+}
+
+.ticket-shape::before,
+.ticket-shape::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: 2px solid #f97316; /* orange-400 */
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.ticket-shape::before {
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.ticket-shape::after {
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6

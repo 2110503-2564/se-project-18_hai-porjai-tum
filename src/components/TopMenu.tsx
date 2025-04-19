@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Image from 'next/image';
 import TopMenuItem from './TopMenuItem';
 import { getServerSession } from 'next-auth';
@@ -89,4 +90,15 @@ export default async function TopMenu() {
             </div>
         </div>
     );
+=======
+// components/TopMenu.tsx
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
+import TopMenuClient from './TopMenuClient';
+
+export default async function TopMenu() {
+  const session = await getServerSession(authOptions);
+
+  return <TopMenuClient session={session} />;
+>>>>>>> d3db22c155123064ed0ed8467211e3e255492ed6
 }
