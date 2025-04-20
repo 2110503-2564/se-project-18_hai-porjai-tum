@@ -17,19 +17,19 @@ export default async function ChatLayout({ children }: { children: React.ReactNo
   const adminUsers = users.filter((user: any) => user.role === "admin" || user.isAdmin);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col min-h-screen">
       {/* Top Admin Bar */}
-      <div className="flex items-center gap-4 overflow-x-auto p-4 border-b bg-white">
+      <div className="flex items-center gap-4 p-4 border-b bg-white sticky top-0 z-10 w-full">
         {adminUsers.length > 0 ? (
           adminUsers.map((user: any) => (
             <Link
               key={user.id}
-              href={`/inbox/${user.id}`}
+              href={`/inbox/admin-chat/${user.id}`}
               className="flex flex-col items-center text-center"
             >
               <div className="w-14 h-14 relative">
                 <Image
-                  src={user.name === "porjai" ?  "/img/popop2.jpeg" : "/img/max.jpg"}
+                  src={user.name === "porjai" ? "/img/popop2.jpeg" : "/img/max.jpg"}
                   alt={user.name}
                   fill
                   className="rounded-full object-cover border-2 border-gray-300"
@@ -43,14 +43,17 @@ export default async function ChatLayout({ children }: { children: React.ReactNo
         )}
       </div>
 
+      {/* Main Content Area */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar with ChatSelecter */}
-        <div className="w-[25vw] border-r overflow-y-auto">
-          {rentals ? <ChatSelecter rentals={rentals} /> : null}
+        <div className="w-[25vw] border-r overflow-y-auto flex-shrink-0">
+          {rentals ? <ChatSelecter rentals={rentals} admins={adminUsers} /> : null}
         </div>
 
         {/* Main Chat Content */}
-        <div className="flex-1 p-4 overflow-y-auto">{children}</div>
+        <div className="flex-1 p-4 overflow-y-auto">
+          {children}
+        </div>
       </div>
     </div>
   );

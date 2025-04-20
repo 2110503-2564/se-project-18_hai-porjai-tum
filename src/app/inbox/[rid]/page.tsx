@@ -169,6 +169,9 @@ export default function ChatRentalPage({ params }: { params: { rid: string } }) 
           <div className="text-gray-600 flex items-center gap-2">
             📍 {selectedChat.data.pickupLocation} away, {selectedChat.data.assumePrice}
           </div>
+          <div className="text-gray-600 flex items-center gap-2">
+             {selectedChat.data.pickupDate} to  {selectedChat.data.returnDate}
+          </div>
 
 
 
