@@ -174,30 +174,58 @@ export default function TopMenuClient({ session }: Props) {
               <div className="cursor-pointer hover:text-gray-400 text-white">Sign-Out</div>
             </Link>
             {(() => {
-              const tier = getTier(session.user.payment) || 'Bronze'; // fallback just in case
-              const style = getTierStyle(tier);
+  const tier = getTier(session.user.payment) || 'Bronze';
+  const style = getTierStyle(tier);
+  const chatHref = session.user.role === 'admin' ? '/chat/admin' : '/chat';
 
-              return (
-                <Link href="/profile">
-                  <div className={`flex items-center gap-3 px-3 py-1 rounded-full text-sm ${style.badge} ${style.shadow}`}>
-                    <Image
-                      src={session.user.name === 'porjai' ? '/img/popop2.jpeg' : '/img/user.jpg'}
-                      alt="User Profile"
-                      width={36}
-                      height={36}
-                      className="rounded-full border border-white"
-                    />
-                    <div className="flex flex-col items-start leading-tight">
-                      <span className="font-semibold">{session.user.name || 'User'}</span>
-                      <span className="text-xs bg-black/20 px-2 py-0.5 rounded-full">
-                         {session.user.balance?.toLocaleString() || '0'} THB
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              );
-              
-            })()}
+  return (
+    <>
+     {/* Chat Button (Only for Admin) */}
+{session.user.role === 'admin' && (
+  <Link href="/inbox">
+    <div
+      className={`w-10 h-10 rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 ${
+        session.user.role === 'admin'
+          ? 'bg-red-400 hover:bg-orange-400'
+          : 'bg-green-500 hover:bg-green-600'
+      }`}
+      title="Go to Inbox"
+    >
+      <Image
+        src="/img/chat3.png"
+        alt="Chat"
+        width={20}
+        height={20}
+      />
+    </div>
+  </Link>
+)}
+
+
+      {/* Profile Button */}
+      <Link href="/profile">
+        <div
+          className={`flex items-center gap-3 px-3 py-1 rounded-full text-sm ${style.badge} ${style.shadow}`}
+        >
+          <Image
+            src={session.user.name === 'porjai' ? '/img/popop2.jpeg' : '/img/user.jpg'}
+            alt="User Profile"
+            width={36}
+            height={36}
+            className="rounded-full border border-white"
+          />
+          <div className="flex flex-col items-start leading-tight">
+            <span className="font-semibold">{session.user.name || 'User'}</span>
+            <span className="text-xs bg-black/20 px-2 py-0.5 rounded-full">
+              {session.user.balance?.toLocaleString() || '0'} THB
+            </span>
+          </div>
+        </div>
+      </Link>
+    </>
+  );
+})()}
+
 
           </>
         ) : (
