@@ -134,7 +134,7 @@ export default function ChatSelecter({ rentals }: { rentals:RentalJson }) {
                     className="w-12 h-12 rounded-full" />
               <div>
                 <div className="font-semibold">{chat.car ? chat.car.name + " " + chat.car.model : "Porjai"}</div>
-                {/* <div className="text-sm text-gray-600">{chat.lastMessage}</div> */}
+                <div className="text-sm text-gray-600">{chat.user}</div>
               </div>
             </div>
             : <></>

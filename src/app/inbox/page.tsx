@@ -19,14 +19,23 @@ export default function AdminChatPage() {
   const [message, setMessage] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+
   useEffect(() => {
-    const inboxUsers: ChatUser[] = [
-      { id: "u1", name: "Pop", avatar: "/img/popop2.jpeg" },
-      { id: "u2", name: "Max", avatar: "/img/max.jpg" },
-      { id: "u3", name: "User123", avatar: "/img/user.jpg" },
-    ];
-    setUsers(inboxUsers);
+    const unsubscribe = onSnapshot(collection(db, "chatsMetadata"), (snapshot) => {
+      const chatUsers = snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: data.chatId,
+          name: data.userName,
+          avatar: data.avatar,
+        };
+      });
+      setUsers(chatUsers);
+    });
+  
+    return () => unsubscribe();
   }, []);
+  
 
   useEffect(() => {
     if (selectedUser) {
@@ -36,8 +45,8 @@ export default function AdminChatPage() {
       );
   
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const messages: any[] = querySnapshot.docs.map((doc) => doc.data());
-        setMessages(messages);
+        const msgs = querySnapshot.docs.map((doc) => doc.data());
+        setMessages(msgs);
       });
   
       return () => unsubscribe();

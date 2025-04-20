@@ -13,7 +13,7 @@ export default function ChatButton({ session }: Props) {
   const [hovered, setHovered] = useState(false);
 
   const isAdmin = session?.user?.role === "admin";
-  const redirectPath = isAdmin ? "/chat/admin" : "/chat";
+  const redirectPath = isAdmin ? "/chat" : "/chat";
 
   return (
     <div
