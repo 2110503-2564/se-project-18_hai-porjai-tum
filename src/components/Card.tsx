@@ -2,7 +2,6 @@ import styles from './card.module.css'
 import Image from 'next/image'
 import InteractiveCard from './InteractiveCard'
 
-
 function getReviewSentiment(rating: number): string {
     if (rating == null) return "No Review";
     if (rating > 3) return "Mostly Positive";
@@ -11,36 +10,22 @@ function getReviewSentiment(rating: number): string {
 }
 
 function getProgressBarColor(rating: number): string {
-    if (rating == null) return "bg-white-500";
-    if (rating > 3) return "bg-red-500";
-    if (rating >= 2) return "bg-yellow-500";
-    return "bg-black-500";
+    if (rating == null) return "bg-white/40";
+    if (rating > 3) return "bg-green-400";
+    if (rating >= 2) return "bg-yellow-400";
+    return "bg-red-400";
 }
 
 function getHoverShadowColor(tier: string): string {
     switch (tier) {
-        case "Bronze":
-            return "shadow-[0_0_45px_rgba(200,120,10,0.8)]"; // Deep bronze
-        case "Silver":
-            return "shadow-[0_0_45px_rgba(140,140,140,0.85)]"; // rich silver shadow
-        case "Gold":
-            return "shadow-[0_0_45px_rgba(255,223,0,0.85)]"; // Lighter Gold
-        case "Ruby":
-            return "shadow-[0_0_45px_rgba(200,50,70,0.9)]"; // Luxurious Ruby (darker and more refined)
-        case "Diamond":
-            return "shadow-[0_0_45px_rgba(10,206,250,0.8)]"; // Cyan-inspired diamond
-        default:
-            return "shadow-[0_0_45px_rgba(128,128,128,0.5)]"; // Default shadow
+        default: return "shadow-[0_0_25px_rgba(192,192,192,0.6)]";
     }
-
 }
+
 function canAccessTier(userTier: string, carTier: string): boolean {
     const tierOrder = ["Bronze", "Silver", "Gold", "Ruby", "Diamond"];
-    const userIndex = tierOrder.indexOf(userTier);
-    const carIndex = tierOrder.indexOf(carTier);
-    return userIndex >= carIndex;
+    return tierOrder.indexOf(userTier) >= tierOrder.indexOf(carTier);
 }
-
 
 export default function Card({
     carName,
@@ -56,59 +41,68 @@ export default function Card({
     userTier: string
 }) {
     const isLocked = !canAccessTier(userTier, tier);
-    const shadowColor = getHoverShadowColor(tier); // Use the shadow color all the time
+    const shadowColor = getHoverShadowColor(tier);
 
     return (
-        <InteractiveCard className={`bg-gray-300 border border-gray-300 rounded-lg overflow-hidden`} isLocked={isLocked}>
+        <InteractiveCard
+  className={`
+    flex flex-row items-stretch 
+    bg-[#1a1a1a] border border-gray-300 rounded-xl overflow-hidden 
+    transition-all duration-300 ease-in-out 
+    hover:scale-105 hover:-translate-y-1 
+    hover:bg-gray-700
+    ${shadowColor}
+    min-h-48 h-48 w-full
+  `}
+  isLocked={isLocked}
+>
+  {/* Left: Car Image */}
+  <div className="relative w-[45%] h-full">
+    <Image
+      src={imgSrc}
+      alt={carName}
+      fill
+      className={`object-cover w-full h-full transition-all duration-300 ${isLocked ? 'brightness-50' : ''}`}
+    />
+    {isLocked && (
+      <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+        <Image src="/img/lock-icon-11.png" alt="Locked" width={40} height={40} />
+      </div>
+    )}
+  </div>
 
-            {/* Image Section */}
-            <div className="w-full h-[70%] relative rounded-t-lg">
-                <Image
-                    src={imgSrc}
-                    alt={carName}
-                    fill={true}
-                    objectFit="cover"
-                    className={`object-cover rounded-t-lg duration-500 ease-in-out transform ${isLocked ? 'brightness-70' : ''}`}
-                />
-                {/* Tier color overlay */}
-                <div className={`absolute inset-0 ${shadowColor}`} />
+  {/* Right: Info */}
+  <div className="w-[55%] p-4 flex flex-col justify-between">
+    <div className="flex items-center justify-between">
+      <h3 className="text-white text-lg font-semibold truncate">{carName}</h3>
+      <span className={`text-xs text-black font-semibold px-2 py-1 rounded-full uppercase
+        ${tier === 'Bronze' ? 'bg-[#cd7f32]' :
+          tier === 'Silver' ? 'bg-[#c0c0c0]' :
+          tier === 'Gold' ? 'bg-[#ffd700]' :
+          tier === 'Ruby' ? 'bg-[#e0115f] text-white' :
+          tier === 'Diamond' ? 'bg-[#b9f2ff]' :
+          'bg-gray-500 text-white'}`}>
+        {tier}
+      </span>
+    </div>
 
-                {/* Lock icon overlay */}
-            </div>
+    <div className="mt-2">
+      <div className="w-full bg-gray-700 h-2 rounded-full overflow-hidden">
+        <div
+          className={`${getProgressBarColor(rating)} h-full`}
+          style={{ width: `${(rating / 5) * 100}%` }}
+        />
+      </div>
+      <p className="text-sm text-gray-300 mt-1">
+        {getReviewSentiment(rating)} <span className="text-xs text-white/60">({rating}/5)</span>
+      </p>
+    </div>
 
-            {/* Content Section */}
-            <div className="w-full h-[30%] p-[10px] flex flex-col justify-between bg-gray-900">
-                {/* Car Name */}
-                <h3 className="font-bold text-lg text-white flex items-center gap-2">
-                    {carName}
+    {isLocked && (
+      <p className="text-xs text-red-400 mt-2">This car is locked for your tier</p>
+    )}
+  </div>
+</InteractiveCard>
 
-                    {isLocked && (
-                        <Image
-                            src="/img/lock-icon-11.png"
-                            alt="logo"
-                            width={20}
-                            height={20}
-                        />
-                    )}
-
-                </h3>
-
-                {/* Progress Bar */}
-                <div className="w-full bg-gray-300 h-2 rounded-full overflow-hidden mt-2">
-                    <div
-                        className={`${getProgressBarColor(rating)} h-full transition-all`}
-                        style={{ width: `${(rating / 5) * 100}%` }}
-                    />
-                </div>
-
-                {/* Rating and Sentiment */}
-                <span className="text-sm text-gray-200 mt-2 font-medium">
-                    {getReviewSentiment(rating)} ({rating}/5)
-                    {isLocked && (
-                        <span className="text-xs text-red-400 bg-red-900 px-2 py-1 rounded">Locked</span>
-                    )}
-                </span>
-            </div>
-        </InteractiveCard>
     );
 }

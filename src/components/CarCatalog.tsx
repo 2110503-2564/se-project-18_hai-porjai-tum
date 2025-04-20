@@ -1,15 +1,11 @@
 import Link from "next/link";
 import Card from "./Card";
-
-import React, { Suspense } from "react";
+import React from "react";
 import getUserProfile from "@/libs/getUserProfile";
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions'
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 import { getServerSession } from "next-auth";
-
-
-import ChatButton from "./ChatButton"; // 👈 เพิ่มตรงนี้
-
-
+import ChatButton from "./ChatButton";
+import FilterMenu from "./FilterMenu"; // 👈 import filter menu
 
 function getTier(price: number) {
     if (price < 1000) return "Bronze";
@@ -18,6 +14,7 @@ function getTier(price: number) {
     else if (price < 7000) return "Ruby";
     else return "Diamond";
 }
+
 function tierRank(tier: string): number {
     switch (tier) {
         case "Bronze": return 1;
@@ -30,59 +27,52 @@ function tierRank(tier: string): number {
 }
 
 export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJson> }) {
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user.token) return null;
 
-    const session = await getServerSession(authOptions)
-    if (!session || !session.user.token) return null
-    const [carsJsonReady, User] = await Promise.all([carsJson, getUserProfile(session.user.token)]);
-    const Tier = getTier(User.data.payment)
-    console.log(User.data.payment);
+    const [carsJsonReady, User] = await Promise.all([
+        carsJson,
+        getUserProfile(session.user.token)
+    ]);
+
+    const Tier = getTier(User.data.payment);
 
     return (
-        <div className="pt-10">
-            <h3 className="text-3xl font-bold text-lg text-white text-center">
-                Explore {carsJsonReady.count}
-                <span className="inline-block mx-2">
-                    <img src="/img/tinder.png" alt="logo" className="inline-block w-8 h-8" />
-                </span>
-                of each cars in our catalog
-            </h3>
-
-            <div
-                style={{
-                    margin: "20px",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignContent: "space-around",
-                    justifyContent: "space-around",
-                    flexWrap: "wrap",
-                    padding: "10px",
-                }}
-            >
-                {carsJsonReady.data.map((CarItem: CarItem) => {
-                    const canAccess = tierRank(Tier) >= tierRank(CarItem.tier);
-
-                    return canAccess ? (
-                        <Link
-                            key={CarItem.id}
-                            href={`/car/${CarItem.id}`}
-                            className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8"
-                        >
-                            <Card carName={CarItem.name} imgSrc={CarItem.picture} rating={CarItem.rating} tier={CarItem.tier} userTier={Tier} />
-                        </Link>
-                    ) : (
-                        <div
-                            key={CarItem.id}
-                            className="w-[100%] sm:w-[50%] md:w-[30%] lg:w-[25%] p-2 sm:p-4 md:p-4 lg:p-8"
-                            title="This car is locked for your current tier"
-                        >
-                            <Card carName={CarItem.name} imgSrc={CarItem.picture} rating={CarItem.rating} tier={CarItem.tier} userTier={Tier} />
-                        </div>
-                    );
-                })}
-
+        <div className="pt-10 px-4 flex flex-col lg:flex-row gap-6">
+            {/* Left Filter Menu */}
+            <div className="w-full lg:w-[250px]">
+                <FilterMenu />
             </div>
 
-            <ChatButton session= {session} /> {/* 👈 แทรกปุ่มตรงนี้ มึงแก้ด้วยไอพอใจ...................................................................... */}
+            {/* Car Catalog Content */}
+            <div className="flex-1">
+              
+                <div className="flex flex-wrap justify-around ">
+                    {carsJsonReady.data.map((CarItem: CarItem) => {
+                        const canAccess = tierRank(Tier) >= tierRank(CarItem.tier);
+
+                        return (
+
+
+
+                            <div className="w-full md:w-1/3 p-0.5" key={CarItem.id}>
+  <Link href={`/car/${CarItem.id}`}>
+  <Card
+                                        carName={CarItem.name}
+                                        imgSrc={CarItem.picture}
+                                        rating={CarItem.rating}
+                                        tier={CarItem.tier}
+                                        userTier={Tier}
+                                    />
+  </Link>
+</div>
+
+                        );
+                    })}
+                </div>
+
+                <ChatButton session={session} />
+            </div>
         </div>
     );
 }
