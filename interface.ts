@@ -29,6 +29,12 @@ interface RentalJson1 {
   count: number,
   data: RentalItem
 }
+interface User1 {
+   _id : string
+   name:string
+   role:string
+   payment:number
+}
 
 interface RentalItem {
   _id?: string
@@ -40,7 +46,7 @@ interface RentalItem {
   pickupLocation: string
   returnDate: string
   returnLocation: string
-  user?: string
+  user?: User1
   car?: CarItem
 }
 
