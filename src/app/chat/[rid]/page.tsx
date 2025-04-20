@@ -64,6 +64,12 @@ export default function ChatRentalPage({ params }: { params: { rid: string } }) 
       setMessage(""); // Clear the input field
     }
   };
+  // const formatTimestamp = (timestamp: any) => {
+  //   const date = timestamp.toDate();
+  //   const hours = date.getHours();
+  //   const minutes = date.getMinutes();
+  //   return `${hours}:${minutes < 10 ? `0${minutes}` : minutes}`; // Format as HH:MM
+  // };
 
   return (
     <div>
@@ -78,16 +84,21 @@ export default function ChatRentalPage({ params }: { params: { rid: string } }) 
             </div>
 
             {/* Chat messages */}
-            <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-white">
-              {messages.map((msg, index) => (
-                <div
-                  key={index}
-                  className={`p-3 rounded-lg ${msg.sender === "user" ? "bg-blue-400 text-white" : "bg-gray-200"}`}
-                >
-                  {msg.content}
-                </div>
-              ))}
-            </div>
+<div className="flex-1 p-4 overflow-y-auto space-y-3 bg-white">
+  {messages.map((msg, index) => (
+    <div
+      key={index}
+      className={`p-3 rounded-lg ${msg.sender === "user" ? "bg-blue-400 text-white" : "bg-gray-200"}`}
+    >
+      {/* Display message content */}
+      <div>{msg.content}</div>
+      
+      {/* Display formatted timestamp outside the blue bubble */}
+      {/* <div className="text-xs text-gray-500 mt-1">{formatTimestamp(msg.timestamp)}</div> */}
+    </div>
+  ))}
+</div>
+
 
             {/* Input + send button */}
             <div className="p-4 border-t flex items-center gap-3 bg-white mb-12">

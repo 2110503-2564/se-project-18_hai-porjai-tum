@@ -1,32 +1,31 @@
-// components/AdminInbox.tsx
 import Image from "next/image";
 
 type Props = {
-  users: { id: string; name: string; avatar?: string }[];
-  selectedUserId: string | null;
-  onSelect: (user: any) => void;
+  rentals: { id: string; carImage: string; rentalId: string }[];
+  selectedRentalId: string | null;
+  onSelect: (rental: any) => void;
 };
 
-export default function AdminInbox({ users, onSelect, selectedUserId }: Props) {
+export default function AdminInbox({ rentals, onSelect, selectedRentalId }: Props) {
   return (
     <div className="flex gap-6 overflow-x-auto px-2 py-2">
-      {users.map((user) => (
+      {rentals.map((rental) => (
         <div
-          key={user.id}
+          key={rental.id}
           className="flex flex-col items-center cursor-pointer hover:opacity-90"
-          onClick={() => onSelect(user)}
+          onClick={() => onSelect(rental)}
         >
           <div className={`w-16 h-16 rounded-full border-2 p-1 
-              ${selectedUserId === user.id ? "border-red-500" : "border-gray-300"}`}>
+              ${selectedRentalId === rental.id ? "border-red-500" : "border-gray-300"}`}>
             <Image
-              src={user.avatar || "/img/user.jpg"}
-              alt={user.name}
+              src={rental.carImage || "/img/default-car.jpg"} // Use the car image
+              alt={rental.rentalId}
               width={64}
               height={64}
               className="rounded-full object-cover w-full h-full"
             />
           </div>
-          <span className="text-xs mt-1 text-center truncate w-16">{user.name}</span>
+          <span className="text-xs mt-1 text-center truncate w-16">{rental.rentalId}</span> {/* Show rental ID */}
         </div>
       ))}
     </div>
