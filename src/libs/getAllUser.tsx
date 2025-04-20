@@ -3,8 +3,9 @@ export default async function getAllUsers(authToken: string) {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${authToken}`
-        }
+            "Authorization": `Bearer ${authToken}`,
+        },
+        cache: "no-store", // optional, avoids caching
     });
 
     if (!response.ok) {
@@ -13,10 +14,9 @@ export default async function getAllUsers(authToken: string) {
 
     const data = await response.json();
 
-    
-    if (!Array.isArray(data.users)) {
-        throw new Error("Invalid response format: expected 'users' array");
+    if (!Array.isArray(data.data)) {
+        throw new Error("Invalid response format: expected 'data' array");
     }
 
-    return data.users;
+    return data.data;
 }

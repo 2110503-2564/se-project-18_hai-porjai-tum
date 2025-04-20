@@ -95,13 +95,13 @@ export default function TopMenuClient({ session }: Props) {
 
       {/* Menu Items */}
       <ul className="left-8 flex items-center gap-8 relative">
-      <li className="pr-6 border-r border-red-500">
-  <Link href="/promo">
-    <div className="text-white cursor-pointer hover:text-gray-400">
-      Promos
-    </div>
-  </Link>
-</li>
+        <li className="pr-6 border-r border-red-500">
+          <Link href="/promo">
+            <div className="text-white cursor-pointer hover:text-gray-400">
+              Promos
+            </div>
+          </Link>
+        </li>
 
 
         {/* Privilege Dropdown */}
@@ -132,12 +132,12 @@ export default function TopMenuClient({ session }: Props) {
         </li>
 
         <li className="pr-6 border-r border-red-500">
-  <Link href="/about">
-    <div className="text-white cursor-pointer hover:text-gray-400">
-      About us
-    </div>
-  </Link>
-</li>
+          <Link href="/about">
+            <div className="text-white cursor-pointer hover:text-gray-400">
+              About us
+            </div>
+          </Link>
+        </li>
 
       </ul>
 
@@ -164,7 +164,7 @@ export default function TopMenuClient({ session }: Props) {
               </TopMenuItemWrapper>
               {session.user.role === 'admin' && (
                 <TopMenuItemWrapper>
-                  <TopMenuItem title="Manage Cars" pageRef="/car/manage" />
+                  <TopMenuItem title="Manage" pageRef="/car/manage" />
                 </TopMenuItemWrapper>
               )}
             </div>
@@ -190,13 +190,13 @@ export default function TopMenuClient({ session }: Props) {
                     <div className="flex flex-col items-start leading-tight">
                       <span className="font-semibold">{session.user.name || 'User'}</span>
                       <span className="text-xs bg-black/20 px-2 py-0.5 rounded-full">
-                         {session.user.balance?.toLocaleString() || '0'} THB
+                        {session.user.balance?.toLocaleString() || '0'} THB
                       </span>
                     </div>
                   </div>
                 </Link>
               );
-              
+
             })()}
 
           </>
