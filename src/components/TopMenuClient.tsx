@@ -95,13 +95,13 @@ export default function TopMenuClient({ session }: Props) {
 
       {/* Menu Items */}
       <ul className="left-8 flex items-center gap-8 relative">
-      <li className="pr-6 border-r border-red-500">
-  <Link href="/promo">
-    <div className="text-white cursor-pointer hover:text-gray-400">
-      Promos
-    </div>
-  </Link>
-</li>
+        <li className="pr-6 border-r border-red-500">
+          <Link href="/promo">
+            <div className="text-white cursor-pointer hover:text-gray-400">
+              Promos
+            </div>
+          </Link>
+        </li>
 
 
         {/* Privilege Dropdown */}
@@ -132,12 +132,12 @@ export default function TopMenuClient({ session }: Props) {
         </li>
 
         <li className="pr-6 border-r border-red-500">
-  <Link href="/about">
-    <div className="text-white cursor-pointer hover:text-gray-400">
-      About us
-    </div>
-  </Link>
-</li>
+          <Link href="/about">
+            <div className="text-white cursor-pointer hover:text-gray-400">
+              About us
+            </div>
+          </Link>
+        </li>
 
       </ul>
 
@@ -164,7 +164,7 @@ export default function TopMenuClient({ session }: Props) {
               </TopMenuItemWrapper>
               {session.user.role === 'admin' && (
                 <TopMenuItemWrapper>
-                  <TopMenuItem title="Manage Cars" pageRef="/car/manage" />
+                  <TopMenuItem title="Manage" pageRef="/car/manage" />
                 </TopMenuItemWrapper>
               )}
             </div>
