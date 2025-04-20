@@ -1,4 +1,4 @@
-import RentalMenu from "@/components/RentalMenu";
+import RentalMenu from "@/components/CarEditMenu";
 import getCars from "@/libs/getCars";
 
 export default function ManageBookingLayout(

@@ -13,7 +13,7 @@ export default async function ManageCar({ id, name, model, tel, pic, rate, tier 
     var createdAt = new Date(profile.data.createdAt)
 
     return (
-        <main className="bg-gradient-to-br from-slate-100 to-slate-200 m-5 p-6 rounded-xl shadow-lg max-w-4xl mx-auto">
+        <main className="bg-gradient-to-br from-slate-100 to-slate-200 m-5 p-6 rounded-xl shadow-lg max-w-4xl mx-auto h-full">
             <div className="mb-6">
                 <h1 className="text-3xl font-bold text-orange-600 mb-2">{profile.data.name}</h1>
                 <table className="table-auto border-separate border-spacing-2 text-gray-700 text-sm">

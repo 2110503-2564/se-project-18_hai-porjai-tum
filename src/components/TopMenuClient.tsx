@@ -169,7 +169,7 @@ export default function TopMenuClient({ session }: Props) {
                 <div className="relative">
                 <TopMenuItemWrapper>
                   <div
-                    className="flex items-center gap-1 select-none"
+                    className="text-center my-auto font-verdana text-[10pt] text-gray-500 flex flex-row gap-2"
                     onClick={() => setShowManageDropdown(!showManageDropdown)}
                   >
                     Manage
@@ -178,19 +178,19 @@ export default function TopMenuClient({ session }: Props) {
                       alt="Dropdown Icon"
                       width={12}
                       height={12}
-                      className={`transition-transform duration-200 ${showManageDropdown ? 'rotate-180' : 'rotate-0'}`}
+                      className={`object-scale-down transition-transform duration-200 ${showManageDropdown ? 'rotate-180' : 'rotate-0'}`}
                     />
                   </div>
                 </TopMenuItemWrapper>
                 {showManageDropdown && (
       <div className="absolute right-0 mt-2 w-44 bg-gray-800 text-white border border-gray-700 rounded-xl shadow-xl animate-fade-in overflow-hidden z-50">
-     <Link href="/car/manage/cars">
-      <div className="px-4 py-2 hover:bg-gray-700 transition-all flex items-center gap-2 cursor-pointer">
+     <Link href="/manage/cars">
+      <div className="px-4 py-2 hover:bg-gray-700 transition-all flex items-center gap-2 cursor-pointer font-verdana ">
     🚗 <span>Manage Cars</span>
   </div>
 </Link>
-<Link href="/car/manage/users">
-  <div className="px-4 py-2 hover:bg-gray-700 transition-all flex items-center gap-2 cursor-pointer">
+<Link href="/manage/users">
+  <div className="px-4 py-2 hover:bg-gray-700 transition-all flex items-center gap-2 cursor-pointer font-verdana ">
     👤 <span>Manage Users</span>
   </div>
   </Link>

@@ -19,7 +19,7 @@ export default function CarItemCard({ car }: { car: CarItem }) {
       } 
 
       return (
-        <div className="relative w-[220px] h-[280px] bg-gradient-to-br from-yellow-100 to-orange-200 rounded-2xl shadow-lg border-2 border-yellow-500 p-3 flex flex-col justify-between">
+        <div className="relative w-[13vw] h-[30vh] my-2 bg-gradient-to-br from-yellow-100 to-orange-200 rounded-2xl shadow-lg border-2 border-yellow-500 p-3 flex flex-col justify-between">
           
           {/* Ticket Ribbon */}
           <div className="absolute -top-1/2% left-1/2 -translate-x-1/2 bg-orange-500 text-white text-sm font-bold px-4 py-1 rounded-full shadow-md z-10">
@@ -40,7 +40,7 @@ export default function CarItemCard({ car }: { car: CarItem }) {
           {/* Action Buttons */}
           <div className="mt-3 flex justify-center space-x-2">
             <button
-              onClick={() => handleClick(`/car/manage?id=${car.id}&name=${car.name}&model=${car.model}&tel=${car.tel}&pic=${car.picture}&rate=${car.pricePerDay}&tier=${car.tier}`)}
+              onClick={() => handleClick(`/manage/cars?id=${car.id}&name=${car.name}&model=${car.model}&tel=${car.tel}&pic=${car.picture}&rate=${car.pricePerDay}&tier=${car.tier}`)}
               className="bg-yellow-500 hover:bg-orange-600 text-white px-3 py-1 rounded-full text-sm shadow-md transition"
             >
               ✏️ Edit

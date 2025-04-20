@@ -43,7 +43,7 @@ export default function MyRental() {
         <div className="p-5">
             {loading ? <p className="text-white text-center">Loading...</p> : rentalsJson ?
                 rentalsJson.data.map((rentalItem: RentalItem) => (
-                    <div className="ticket-shape flex flex-col sm:flex-row items-center border border-orange-400 bg-white shadow-lg overflow-hidden m-4 w-full max-w-4xl">
+                    <div key={rentalItem._id} className="ticket-shape flex flex-col sm:flex-row items-center border border-orange-400 bg-white shadow-lg overflow-hidden m-4 w-full max-w-4xl">
                         <div className="bg-orange-400 text-white px-4 py-2 w-full sm:w-auto text-center font-bold tracking-widest">
                             E TICKET
                         </div>
@@ -61,7 +61,7 @@ export default function MyRental() {
                 
                         <div className="flex-1 px-4 py-3 text-sm text-gray-800 border-l border-dashed border-orange-400">
                             {userJson?.data.role === "admin" && (
-                                <div className="text-xs text-gray-500">User ID: {rentalItem.user}</div>
+                                <div className="text-xs text-gray-500">User ID: {rentalItem.user?._id}</div>
                             )}
                             <div><strong>Model:</strong> {rentalItem.car?.model}</div>
                             <div><strong>Number of Days:</strong> {dayjs(rentalItem.returnDate).diff(dayjs(rentalItem.pickupDate), "day")}</div>
