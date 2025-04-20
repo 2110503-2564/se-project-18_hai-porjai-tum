@@ -6,7 +6,7 @@ import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 export default async function ChatLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions)
   const rentals = session ? await getRentals(session?.user.token) : null
-  console.log(rentals)
+  // console.log(rentals)
   
   return (
     <div className="flex h-screen overflow-hidden">
