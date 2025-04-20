@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function ChatSelecter({ setSelectedChat }: { setSelectedChat: (chat: any) => void }) {
+export default function ChatSelecter() {
 
   const router = useRouter()
 

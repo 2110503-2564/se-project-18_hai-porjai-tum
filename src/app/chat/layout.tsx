@@ -1,15 +1,18 @@
-"use client";
-import { useState } from "react";
+import getRentals from "@/libs/getRentals";
 import ChatSelecter from "@/components/ChatSelecter"; // Adjust path according to your file structure
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 
-export default function ChatLayout({ children }: { children: React.ReactNode }) {
-  const [selectedChat, setSelectedChat] = useState<any>(null); // Track the selected chat
+export default async function ChatLayout({ children }: { children: React.ReactNode }) {
+  const session = await getServerSession(authOptions)
+  const rentals = session ? await getRentals(session?.user.token) : null
+  console.log(rentals)
   
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar with ChatSelecter */}
       <div className="w-[25vw] border border-silver overflow-y-auto">
-        <ChatSelecter setSelectedChat={setSelectedChat} />
+        {rentals ? <ChatSelecter rentals={rentals} /> : null}
       </div>
 
       {/* Main Content Area */}

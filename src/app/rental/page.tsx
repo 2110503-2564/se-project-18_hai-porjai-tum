@@ -76,9 +76,9 @@ export default function Rental() {
                 carId: cid,
                 carModel: model,
                 numOfDays: returnDate.diff(pickupDate, "day"),
-                pickupDate: dayjs(pickupDate).format("YYYY/MM/DD"),
+                pickupDate: dayjs(pickupDate.add(7, 'hour')).format("YYYY/MM/DD"),
                 pickupLocation: pickupLocation,
-                returnDate: dayjs(returnDate).format("YYYY/MM/DD"),
+                returnDate: dayjs(returnDate.add(7, 'hour')).format("YYYY/MM/DD"),
                 returnLocation: returnLocation
             }
             dispatch(addRental(item))
