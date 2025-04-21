@@ -76,7 +76,7 @@ export default function ChatRentalPage({ params }: { params: { rid: string } }) 
       {!selectedChat ? (
         <p>Loading...</p>
       ) : (
-        <div className="flex h-screen overflow-hidden">
+        <div className="flex h-[84vh] overflow-hidden">
           {/* Message area */}
           <div className="flex-1 flex flex-col relative">
             <div className="bg-gray-100 p-2 text-sm border-b">

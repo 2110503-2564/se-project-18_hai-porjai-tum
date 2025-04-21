@@ -22,9 +22,10 @@ export default function AdminInbox({ rentals, admins }: { rentals: RentalJson; a
   };
 
   return (
-    <div className="w-[25vw] h-[100vh] border border-silver overflow-y-auto">
-      {/* Tabs */}
-      <div className="flex justify-around bg-white py-2">
+    <div className="border border-silver overflow-y-auto h-full">
+    {/* Tabs */}
+    <div className="sticky top-0 z-10 bg-white">
+      <div className="flex justify-around py-2 border-b bg-white">
         <div
           className={`cursor-pointer text-base font-semibold ${
             selectedTab === "rental" ? "text-red-600 border-b-2 border-red-500" : "text-gray-600"
@@ -42,59 +43,59 @@ export default function AdminInbox({ rentals, admins }: { rentals: RentalJson; a
           Friends
         </div>
       </div>
+    </div>
 
-      {/* Rental Chats */}
-      {selectedTab === "rental" ? (
-        <div>
-          {rentals.data.map((chat) =>
-            chat._id ? (
-              <div
-                key={chat._id}
-                onClick={() => router.push("/inbox/" + chat._id)}
-                className="flex items-center gap-3 p-4 hover:bg-gray-200 cursor-pointer border-b"
-              >
-                <Image
-                  src={chat.car ? chat.car.picture : "/img/Profile.png"}
-                  alt={chat.car ? chat.car.name : "car"}
-                  width={200}
-                  height={200}
-                  className="w-12 h-12 rounded-full"
-                />
-                <div>
-                  <div className="font-semibold">
-                    {chat.car ? `${chat.car.name} ${chat.car.model}` : "Porjai"}
-                  </div>
-                  <div className="text-sm text-gray-600">{chat.user?.name}</div>
-                </div>
-              </div>
-            ) : null
-          )}
-        </div>
-      ) : (
-        // Admin Chats (Friends tab)
-        <div>
-  {admins.map((admin) => (
-    <div
-      key={admin._id}
-      onClick={() => router.push(`/inbox/admin-chat/${admin._id}`)} // Updated route to navigate to admin's chat page
-      className="flex items-center gap-3 p-4 hover:bg-gray-200 cursor-pointer border-b"
-    >
-      <Image
-        src={admin.name === "porjai" ? "/img/popop2.jpeg" : "/img/max.jpg"}
-        alt={admin.name}
-        width={200}
-        height={200}
-        className="w-12 h-12 rounded-full"
-      />
+    {/* Content */}
+    {selectedTab === "rental" ? (
       <div>
-        <div className="font-semibold">{admin.name}</div>
-        <div className="text-sm text-gray-600">Talk to {admin.name}</div>
+        {rentals.data.map((chat) =>
+          chat._id ? (
+            <div
+              key={chat._id}
+              onClick={() => router.push("/inbox/" + chat._id)}
+              className="flex items-center gap-3 p-4 hover:bg-gray-200 cursor-pointer border-b"
+            >
+              <Image
+                src={chat.car ? chat.car.picture : "/img/Profile.png"}
+                alt={chat.car ? chat.car.name : "car"}
+                width={200}
+                height={200}
+                className="w-12 h-12 rounded-full"
+              />
+              <div>
+                <div className="font-semibold">
+                  {chat.car ? `${chat.car.name} ${chat.car.model}` : "Porjai"}
+                </div>
+                <div className="text-sm text-gray-600">{chat.user?.name}</div>
+              </div>
+            </div>
+          ) : null
+        )}
       </div>
-    </div>
-  ))}
-</div>
+    ) : (
+      <div>
+        {admins.map((admin) => (
+          <div
+            key={admin._id}
+            onClick={() => router.push(`/inbox/admin-chat/${admin._id}`)}
+            className="flex items-center gap-3 p-4 hover:bg-gray-200 cursor-pointer border-b"
+          >
+            <Image
+              src={admin.name === "porjai" ? "/img/popop2.jpeg" : "/img/max.jpg"}
+              alt={admin.name}
+              width={200}
+              height={200}
+              className="w-12 h-12 rounded-full"
+            />
+            <div>
+              <div className="font-semibold">{admin.name}</div>
+              <div className="text-sm text-gray-600">Talk to {admin.name}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
 
-      )}
-    </div>
   );
 }

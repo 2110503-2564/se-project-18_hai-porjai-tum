@@ -55,7 +55,7 @@ export default function AdminChatPage() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-[100%] overflow-hidden">
       <div className="flex-1 flex flex-col relative">
         {/* Chat messages */}
         <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-white">

@@ -1,5 +1,5 @@
 import getRentals from "@/libs/getRentals";
-import ChatSelecter from "@/components/AdminInbox";
+import AdminInbox from "@/components/AdminInbox";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import getAllUsers from "@/libs/getAllUser";
@@ -17,9 +17,9 @@ export default async function ChatLayout({ children }: { children: React.ReactNo
   const adminUsers = users.filter((user: any) => user.role === "admin" || user.isAdmin);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-[93vh]">
       {/* Top Admin Bar */}
-      <div className="flex items-center gap-4 p-4 border-b bg-white sticky top-0 z-10 w-full">
+      <div className="flex items-center gap-4 p-4 border-b bg-white sticky top-0 z-10 w-full h-[14vh] pt-7">
         {adminUsers.length > 0 ? (
           adminUsers.map((user: any) => (
             <Link
@@ -45,9 +45,9 @@ export default async function ChatLayout({ children }: { children: React.ReactNo
 
       {/* Main Content Area */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar with ChatSelecter */}
+        {/* Sidebar with AdminInbox */}
         <div className="w-[25vw] border-r overflow-y-auto flex-shrink-0">
-          {rentals ? <ChatSelecter rentals={rentals} admins={adminUsers} /> : null}
+          {rentals ? <AdminInbox rentals={rentals} admins={adminUsers} /> : null}
         </div>
 
         {/* Main Chat Content */}
