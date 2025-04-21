@@ -18,12 +18,12 @@ export default function AboutPage() {
   useEffect(() => {
     const mockContributors: User[] = [
       { id: 'test4', name: 'orway', role: 'UI', avatar: '/img/popop2.jpeg' },
-      { id: 'test3', name: 'tenouuu', role: 'admin', avatar: '/img/glass.jpg' },
+      { id: 'test3', name: 'tenouuu', role: 'admin', avatar: '/img/teno.jpg' },
       { id: '3', name: 'Siphax', role: 'admin', avatar: '/img/max.jpg' },
       { id: '4', name: 'Jokungz', role: 'admin', avatar: '/img/glass.jpg' },
-      { id: '5', name: 'tahto', role: 'admin', avatar: '/img/user.jpg' },
+      { id: '5', name: 'tahto', role: 'admin', avatar: '/img/tah.jpg' },
       { id: '6', name: 'TRIPATROPATRALALALIRILIRATUNGTUN', role: 'admin', avatar: '/img/PannGG.jpg' },
-      { id: '7', name: 'qwert_ato', role: 'admin', avatar: '/img/user.jpg' },
+      { id: '7', name: 'qwert_ato', role: 'admin', avatar: '/img/mokun.png' },
       { id: '8', name: 'Master T', role: 'admin', avatar: '/img/user.jpg' },
     ];
     setAdmins(mockContributors);
