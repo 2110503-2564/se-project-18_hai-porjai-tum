@@ -75,6 +75,8 @@ export default function Card({
   <div className="w-[55%] p-4 flex flex-col justify-between">
     <div className="flex items-center justify-between">
       <h3 className="text-white text-lg font-semibold truncate">{carName}</h3>
+      
+
       <span className={`text-xs text-black font-semibold px-2 py-1 rounded-full uppercase
         ${tier === 'Bronze' ? 'bg-[#cd7f32]' :
           tier === 'Silver' ? 'bg-[#c0c0c0]' :
@@ -85,6 +87,10 @@ export default function Card({
         {tier}
       </span>
     </div>
+    <div className="mt-2 text-white text-sm">
+    <p className="truncate">Seats: {Math.floor(Math.random() * (7 - 2 + 1)) + 2}</p>
+    <p className="truncate">Type: {['SUV', 'Sedan', 'Coupe', 'Truck', 'Convertible'][Math.floor(Math.random() * 5)]}</p>
+  </div>
 
     <div className="mt-2">
       <div className="w-full bg-gray-700 h-2 rounded-full overflow-hidden">
