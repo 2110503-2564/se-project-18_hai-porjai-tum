@@ -47,7 +47,7 @@ export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJs
             {/* Car Catalog Content */}
             <div className="flex-1">
               
-                <div className="flex flex-wrap justify-around ">
+                <div className="flex flex-wrap justify-around p-2">
                     {carsJsonReady.data.map((CarItem: CarItem) => {
                         const canAccess = tierRank(Tier) >= tierRank(CarItem.tier);
 
@@ -55,7 +55,7 @@ export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJs
 
 
 
-                            <div className="w-full md:w-1/3 p-0.5" key={CarItem.id}>
+                            <div className="w-full md:w-1/3 p-0.5 " key={CarItem.id}>
   <Link href={`/car/${CarItem.id}`}>
   <Card
                                         carName={CarItem.name}
@@ -71,7 +71,7 @@ export default async function CarCatalog({ carsJson }: { carsJson: Promise<CarJs
                     })}
                 </div>
 
-                <ChatButton session={session} />
+                {/* <ChatButton session={session} /> */}
             </div>
         </div>
     );
