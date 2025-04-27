@@ -2,7 +2,7 @@
 export default async function updateUserPayment(userId: string, payment: number, token: string) {
     console.log("Updating payment for user with ID = " + userId + " to payment = " + payment);
 
-    const response = await fetch(`http://localhost:5000/api/v1/${userId}/setpayment`, {
+    const response = await fetch(`https://sw2-backend-backup1.onrender.com/api/v1/${userId}/setpayment`, {
         method: "POST", // POST method since we're updating
         headers: {
             "Content-Type": "application/json",
