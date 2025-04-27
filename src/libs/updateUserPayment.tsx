@@ -1,6 +1,6 @@
 export default async function updateUserPayment(payment: Number, token: string) {
     console.log("Payment = " + payment)
-    const response = await fetch(`https://sw2-backend-backup1.onrender.com/api/v1/users/update`, {
+    const response = await fetch(`https://sw2-backend-backup1.onrender.com/api/v1/update`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

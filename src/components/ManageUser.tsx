@@ -1,14 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Pencil } from 'lucide-react'
 import getAllUsers from '@/libs/getAllUser'
+import setUserPayment from '@/libs/setUserPayment'
 
 export default function ManageUserPage({ token }: { token: string }) {
     const [users, setUsers] = useState<any[]>([])
     const [error, setError] = useState<string | null>(null)
+    const [editingUserId, setEditingUserId] = useState<string | null>(null)
+    const [editedPayment, setEditedPayment] = useState<number>(0)
 
     useEffect(() => {
-        console.log("Token: ", token)
         const fetchUsers = async () => {
             try {
                 const usersData = await getAllUsers(token)
@@ -20,6 +23,29 @@ export default function ManageUserPage({ token }: { token: string }) {
 
         fetchUsers()
     }, [token])
+
+    const handleEditClick = (user: any) => {
+        setEditingUserId(user._id)
+        setEditedPayment(user.payment)
+    }
+
+    const handleSavePayment = async (userId: string) => {
+        try {
+            // Send userId along with payment and token to backend
+            await setUserPayment(userId, editedPayment, token);
+
+            // Update UI after success
+            setUsers((prev) =>
+                prev.map((user) =>
+                    user._id === userId ? { ...user, payment: editedPayment } : user
+                )
+            );
+            setEditingUserId(null);  // Reset editing state
+        } catch (error) {
+            console.error(error);
+            alert('Failed to save payment');
+        }
+    }
 
     return (
         <section className="p-6">
@@ -45,12 +71,36 @@ export default function ManageUserPage({ token }: { token: string }) {
                                 <td className="px-4 py-2">{user.email}</td>
                                 <td className="px-4 py-2">{user.tel}</td>
                                 <td className="px-4 py-2 capitalize">{user.role}</td>
-                                <td className="px-4 py-2">{user.payment}</td>
+                                <td className="px-4 py-2 flex items-center gap-2">
+                                    {editingUserId === user._id ? (
+                                        <>
+                                            <input
+                                                type="number"
+                                                value={editedPayment}
+                                                onChange={(e) => setEditedPayment(parseFloat(e.target.value))}
+                                                className="border px-2 py-1 w-24 rounded"
+                                            />
+                                            <button
+                                                onClick={() => handleSavePayment(user._id)}
+                                                className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded"
+                                            >
+                                                Save
+                                            </button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            {user.payment}
+                                            <button onClick={() => handleEditClick(user)}>
+                                                <Pencil size={16} className="text-gray-500 hover:text-orange-500" />
+                                            </button>
+                                        </>
+                                    )}
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
         </section>
-    )
+    );
 }
