@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { addRental, removeRental } from "../../redux/features/rentSlice";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function Rental() {
     const [pickupDate, setPickupDate] = useState<Dayjs | null>(null);
@@ -82,6 +83,7 @@ export default function Rental() {
                 returnLocation: returnLocation
             }
             dispatch(addRental(item))
+            alert("Your booking is successful and awaiting confirmation.")
         }else alert("please fill the form correctly")
     }
 
@@ -121,7 +123,7 @@ export default function Rental() {
                     onLocationChange={(value: string) => setReturnLocation(value)}
                 />
             </div>
-
+            
             <button
                 className="block rounded-md bg-sky-600 hover:bg-indigo-600 px-3 py-2 shadow-sm text-white"
                 onClick={makeRental}

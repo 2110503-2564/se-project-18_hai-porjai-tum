@@ -18,11 +18,12 @@ export default function RentalList() {
                 const response = await createRental(rentalItem.carId, session.user._id, rentalItem, session.user.token)
                 if (response.success) {
                     dispatch(removeRental(rentalItem))
+                    const res = await updateUserPayment(response.data.assumePrice, session.user.token); // Assuming token is available
+                    console.log(res.success)
                 }
-                await updateUserPayment(response.data.assumePrice, session.user.token); // Assuming token is available
-                // alert(response.success)
+                // alert(res.success)
             } catch (error) {
-                console.log("Failed to send data")
+                console.log("Failed to send data " + error)
             }
     }
 

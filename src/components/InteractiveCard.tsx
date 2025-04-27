@@ -29,7 +29,7 @@ export default function InteractiveCard({
 
     return (
         <motion.div
-            className={`w-full h-[300px] rounded-lg shadow-lg bg-gray-300 ${className}`}
+            className={`w-full h-[300px] rounded-lg shadow-lg  ${className}`}
             onMouseOver={(e) => onCardMouseAction(e)}
             onMouseOut={(e) => onCardMouseAction(e)}
             drag // Enables drag functionality

@@ -47,11 +47,11 @@ export default function Card({
         <InteractiveCard
   className={`
     flex flex-row items-stretch 
-    bg-[#1a1a1a] border border-gray-300 rounded-xl overflow-hidden 
+    bg-[#2d3233] border border-gray-300 rounded-xl overflow-hidden 
     transition-all duration-300 ease-in-out 
     hover:scale-105 hover:-translate-y-1 
-    hover:bg-gray-700
-    ${shadowColor}
+    hover:bg-[#8e9799]
+    shadowColor}
     min-h-48 h-48 w-full
   `}
   isLocked={isLocked}

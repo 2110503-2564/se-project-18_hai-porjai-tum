@@ -9,6 +9,7 @@ import NewsTicker from './NewsTicker';
 
 // Import the Inter font from Google Fonts
 import { Inter } from 'next/font/google';
+import ChatButton from './ChatButton';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -276,6 +277,7 @@ export default function TopMenuClient({ session }: Props) {
           </>
         )}
       </div>
+      <ChatButton session={session} />
     </div>
   );
 }
