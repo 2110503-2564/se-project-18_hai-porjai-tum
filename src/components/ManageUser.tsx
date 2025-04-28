@@ -13,6 +13,10 @@ export default function ManageUserPage({ token }: { token: string }) {
   const [editedPayment, setEditedPayment] = useState<number>(0);
   const [profile, setProfile] = useState<any>(null);
 
+  const [editedTier, setEditedTier] = useState<string>("Bronze");
+  const [isTierManuallyEdited, setIsTierManuallyEdited] =
+    useState<boolean>(false);
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -29,24 +33,26 @@ export default function ManageUserPage({ token }: { token: string }) {
   const handleEditClick = (user: any) => {
     setEditingUserId(user._id);
     setEditedPayment(user.payment);
+    const currentTier = getTier(user.payment);
+    setEditedTier(currentTier);
+    setIsTierManuallyEdited(false);
   };
 
-  const handleSavePayment = async (userId: string) => {
-    try {
-      // Send userId along with payment and token to backend
-      await setUserPayment(userId, editedPayment, token);
-
-      // Update UI after success
-      setUsers((prev) =>
-        prev.map((user) =>
-          user._id === userId ? { ...user, payment: editedPayment } : user
-        )
-      );
-      setEditingUserId(null); // Reset editing state
-    } catch (error) {
-      console.error(error);
-      alert("Failed to save payment");
-    }
+  const handleSavePayment = (userId: string) => {
+    // หา index ผู้ใช้
+    const updatedUsers = users.map((user) => {
+      if (user._id === userId) {
+        return {
+          ...user,
+          payment: editedPayment,
+          tier: isTierManuallyEdited ? editedTier : getTier(editedPayment), 
+        };
+      }
+      return user;
+    });
+  
+    setUsers(updatedUsers); 
+    setEditingUserId(null); 
   };
 
   return (
@@ -64,7 +70,7 @@ export default function ManageUserPage({ token }: { token: string }) {
               <th className="px-4 py-2 text-left">Name</th>
               <th className="px-4 py-2 text-left">Email</th>
               <th className="px-4 py-2 text-left">Tier</th>
-             
+
               <th className="px-4 py-2 text-left">Role</th>
               <th className="px-4 py-2 text-left">Payment</th>
             </tr>
@@ -72,7 +78,7 @@ export default function ManageUserPage({ token }: { token: string }) {
 
           <tbody>
             {users.map((user) => {
-              const userTier = getTier(user.payment);
+              const userTier = user.tier || getTier(user.payment); 
               const tierStyle = getTierStyle(userTier);
 
               return (
@@ -82,7 +88,7 @@ export default function ManageUserPage({ token }: { token: string }) {
                 >
                   <td className="px-4 py-2">{user.name}</td>
                   <td className="px-4 py-2">{user.email}</td>
-                 
+
                   <td className="px-4 py-2" style={tierStyle}>
                     {userTier}
                   </td>
@@ -90,6 +96,22 @@ export default function ManageUserPage({ token }: { token: string }) {
                   <td className="px-4 py-2 flex items-center gap-2">
                     {editingUserId === user._id ? (
                       <>
+                        <select
+                          value={editedTier}
+                          onChange={(e) => {
+                            setEditedTier(e.target.value);
+                            setIsTierManuallyEdited(true);
+                          }}
+                          className="border px-2 py-1 w-32 rounded"
+                        >
+                          <option value="Bronze">Bronze</option>
+                          <option value="Silver">Silver</option>
+                          <option value="Gold">Gold</option>
+                          <option value="Ruby">Ruby</option>
+                          <option value="Diamond">Diamond</option>
+                        </select>
+
+                       
                         <input
                           type="number"
                           value={editedPayment}
@@ -98,6 +120,7 @@ export default function ManageUserPage({ token }: { token: string }) {
                           }
                           className="border px-2 py-1 w-24 rounded"
                         />
+
                         <button
                           onClick={() => handleSavePayment(user._id)}
                           className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded"
