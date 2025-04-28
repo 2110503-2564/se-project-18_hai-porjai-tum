@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 
 
-function getTier(price: number) {
+export function getTier(price: number) {
     if (price < 1000) return "Bronze";
     else if (price < 2000) return "Silver";
     else if (price < 4000) return "Gold";
@@ -19,7 +19,7 @@ function getTier(price: number) {
     else return "Diamond";
 }
 
-function getTierStyle(tier: string) {
+export function getTierStyle(tier: string) {
     switch (tier) {
         case "Bronze":
             return {
