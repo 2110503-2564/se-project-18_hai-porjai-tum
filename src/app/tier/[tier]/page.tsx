@@ -5,6 +5,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 import Card from '@/components/Card';
 import Link from 'next/link';
 import TierClient from './TierClient'; // ✅ ใช้งานจากไฟล์แยก
+import { getTier } from '@/utils/getTier';
 
 const covers: Record<string, string> = {
   Bronze: '/img/tinderbg.png',
@@ -36,10 +37,4 @@ export default async function TierPage({ params }: { params: { tier: string } })
   );
 }
 
-function getTier(price: number) {
-  if (price < 1000) return 'Bronze';
-  else if (price < 2000) return 'Silver';
-  else if (price < 4000) return 'Gold';
-  else if (price < 7000) return 'Ruby';
-  else return 'Diamond';
-}
+

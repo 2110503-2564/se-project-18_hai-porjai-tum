@@ -6,14 +6,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { getServerSession } from "next-auth";
 import ChatButton from "./ChatButton";
 import FilterMenu from "./FilterMenu"; // 👈 import filter menu
+import { getTier } from "@/utils/getTier";
 
-function getTier(price: number) {
-  if (price < 1000) return "Bronze";
-  else if (price < 2000) return "Silver";
-  else if (price < 4000) return "Gold";
-  else if (price < 7000) return "Ruby";
-  else return "Diamond";
-}
 
 function tierRank(tier: string): number {
   switch (tier) {
@@ -45,7 +39,8 @@ export default async function CarCatalog({
     getUserProfile(session.user.token),
   ]);
 
-  const Tier = getTier(User.data.payment);
+  const payment = User.data.payment as number; // cast ชัดๆ
+  const Tier = User.tier ||getTier(payment);
 
   return (
     <div className="pt-10 px-4 flex flex-col lg:flex-row gap-6">

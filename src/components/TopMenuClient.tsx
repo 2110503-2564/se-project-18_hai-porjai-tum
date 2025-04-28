@@ -10,23 +10,16 @@ import NewsTicker from "./NewsTicker";
 import { Inter } from "next/font/google";
 import ChatButton from "./ChatButton";
 import { useSession } from "next-auth/react";
+import { getTier } from "@/utils/getTier";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function TopMenuClient() {
-  const { data: session } = useSession({
-    required: true,
-  });
+  const { data: session } = useSession();
   const [showManageDropdown, setShowManageDropdown] = useState(false);
   
   const [showPrivilege, setShowPrivilege] = useState(false);
-  function getTier(price: number) {
-    if (price < 1000) return "Bronze";
-    else if (price < 2000) return "Silver";
-    else if (price < 4000) return "Gold";
-    else if (price < 7000) return "Ruby";
-    else return "Diamond";
-  }
+  
   const TopMenuItemWrapper = ({ children }: { children: React.ReactNode }) => {
     return (
       <div className="bg-gray-800/60 hover:bg-gray-700/70 text-white px-4 py-1 rounded-full transition-all duration-200 shadow-md hover:shadow-lg hover:scale-105 cursor-pointer">

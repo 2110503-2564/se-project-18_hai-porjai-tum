@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { Pencil } from "lucide-react";
 import getAllUsers from "@/libs/getAllUser";
 import setUserPayment from "@/libs/setUserPayment";
-import { getTier, getTierStyle } from "@/app/profile/page";
-
+import { getTier } from "@/utils/getTier";
+import { getTierStyle } from "@/utils/getTierStyle";
 export default function ManageUserPage({ token }: { token: string }) {
   const [users, setUsers] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -33,27 +33,38 @@ export default function ManageUserPage({ token }: { token: string }) {
   const handleEditClick = (user: any) => {
     setEditingUserId(user._id);
     setEditedPayment(user.payment);
-    const currentTier = getTier(user.payment);
+    const payment = user.payment as number; // cast ชัดๆ
+    const currentTier = user.tier ||getTier(payment);
     setEditedTier(currentTier);
     setIsTierManuallyEdited(false);
   };
 
-  const handleSavePayment = (userId: string) => {
-    // หา index ผู้ใช้
-    const updatedUsers = users.map((user) => {
-      if (user._id === userId) {
-        return {
-          ...user,
-          payment: editedPayment,
-          tier: isTierManuallyEdited ? editedTier : getTier(editedPayment),
-        };
-      }
-      return user;
-    });
-
-    setUsers(updatedUsers);
-    setEditingUserId(null);
+  const handleSavePayment = async (userId: string) => {
+    try {
+      // 1. Save payment ไป backend ก่อน
+      await setUserPayment(userId, editedPayment, token);
+  
+      // 2. อัปเดต tier ด้วย
+      const updatedUsers = users.map((user) => {
+        if (user._id === userId) {
+          return {
+            ...user,
+            payment: editedPayment,
+            tier: isTierManuallyEdited ? editedTier : getTier(editedPayment),
+          };
+        }
+        return user;
+      });
+  
+      // 3. เซฟลง state
+      setUsers(updatedUsers);
+      setEditingUserId(null);
+    } catch (error) {
+      console.error(error);
+      alert("Failed to save payment");
+    }
   };
+  
 
   return (
     <section className="p-6">
@@ -78,7 +89,8 @@ export default function ManageUserPage({ token }: { token: string }) {
 
           <tbody>
             {users.map((user) => {
-              const userTier = user.tier || getTier(user.payment);
+              const payment = user.payment as number; // cast ชัดๆ
+              const userTier = user.tier || getTier(payment);
               const tierStyle = getTierStyle(userTier);
 
               return (
