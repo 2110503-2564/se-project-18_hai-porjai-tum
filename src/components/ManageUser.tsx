@@ -45,14 +45,14 @@ export default function ManageUserPage({ token }: { token: string }) {
         return {
           ...user,
           payment: editedPayment,
-          tier: isTierManuallyEdited ? editedTier : getTier(editedPayment), 
+          tier: isTierManuallyEdited ? editedTier : getTier(editedPayment),
         };
       }
       return user;
     });
-  
-    setUsers(updatedUsers); 
-    setEditingUserId(null); 
+
+    setUsers(updatedUsers);
+    setEditingUserId(null);
   };
 
   return (
@@ -78,7 +78,7 @@ export default function ManageUserPage({ token }: { token: string }) {
 
           <tbody>
             {users.map((user) => {
-              const userTier = user.tier || getTier(user.payment); 
+              const userTier = user.tier || getTier(user.payment);
               const tierStyle = getTierStyle(userTier);
 
               return (
@@ -88,12 +88,9 @@ export default function ManageUserPage({ token }: { token: string }) {
                 >
                   <td className="px-4 py-2">{user.name}</td>
                   <td className="px-4 py-2">{user.email}</td>
+                  <td className="px-4 py-2 flex items-center gap-2" style={tierStyle}>
 
-                  <td className="px-4 py-2" style={tierStyle}>
-                    {userTier}
-                  </td>
-                  <td className="px-4 py-2 capitalize">{user.role}</td>
-                  <td className="px-4 py-2 flex items-center gap-2">
+                   
                     {editingUserId === user._id ? (
                       <>
                         <select
@@ -111,7 +108,23 @@ export default function ManageUserPage({ token }: { token: string }) {
                           <option value="Diamond">Diamond</option>
                         </select>
 
-                       
+                      </>
+                    ) : (
+                      <>
+                       {userTier}
+                        <button onClick={() => handleEditClick(user)}>
+                          <Pencil
+                            size={16}
+                            className="text-gray-500 hover:text-orange-500"
+                          />
+                        </button>
+                      </>
+                    )}
+                  </td>
+                  <td className="px-4 py-2 capitalize">{user.role}</td>
+                  <td className="px-4 py-2 flex items-center gap-2">
+                    {editingUserId === user._id ? (
+                      <>
                         <input
                           type="number"
                           value={editedPayment}
