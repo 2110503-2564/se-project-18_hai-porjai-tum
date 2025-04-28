@@ -23,7 +23,7 @@ export default function InteractiveCard({
             event.currentTarget.classList.remove('shadow-2xl');
             event.currentTarget.classList.remove('bg-neutral-200');
             event.currentTarget.classList.add('shadow-lg');
-            event.currentTarget.classList.add('bg-gray-300');
+            //event.currentTarget.classList.add('bg-gray-300');
         }
     }
 
