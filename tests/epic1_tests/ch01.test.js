@@ -8,8 +8,6 @@ test('TC1-1 test', async ({ page }) => {
     await page.getByRole('textbox', { name: 'Email' }).press('Tab');
     await page.getByRole('textbox', { name: 'Password' }).fill('123456');
     await page.getByRole('button', { name: 'Sign in with Credentials' }).click();
-    await page.getByRole('button', { name: 'Ready' }).click();
-    await page.getByRole('button', { name: 'Car Catalog' }).click()
     await page.getByRole('button', { name: 'Chat' }).click();
     await page.locator('div').filter({ hasText: /^Mustang 1994 mustang 19942025-04-30T00:00:00\.000Z$/ }).first().click();
 });
@@ -22,8 +20,6 @@ test('TC1-2 test', async ({ page }) => {
     await page.getByRole('textbox', { name: 'Email' }).press('Tab');
     await page.getByRole('textbox', { name: 'Password' }).fill('123456');
     await page.getByRole('button', { name: 'Sign in with Credentials' }).click();
-    await page.getByRole('button', { name: 'Ready' }).click();
-    await page.getByRole('button', { name: 'Car Catalog' }).click()
     await page.getByRole('button', { name: 'Chat' }).click();
     await page.locator('div').filter({ hasText: /^Mustang 1994 mustang 19942025-04-30T00:00:00\.000Z$/ }).first().click();
 

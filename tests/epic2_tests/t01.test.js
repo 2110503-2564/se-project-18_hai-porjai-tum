@@ -53,8 +53,6 @@ test('TC-5-4 test', async ({ page }) => {
     await page.goto('http://localhost:3000/');
     await page.getByRole('link', { name: 'Sign-In' }).click();
     await page.getByRole('textbox', { name: 'Email' }).click();
-    await page.getByRole('textbox', { name: 'Email' }).fill('rU');
-    await page.getByRole('textbox', { name: 'Email' }).press('CapsLock');
     await page.getByRole('textbox', { name: 'Email' }).fill('ruby@gmail.com');
     await page.getByRole('textbox', { name: 'Email' }).press('Tab');
     await page.getByRole('textbox', { name: 'Password' }).fill('123456');
