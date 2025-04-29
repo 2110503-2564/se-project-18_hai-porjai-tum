@@ -267,9 +267,9 @@ export default function TopMenuClient() {
                         <span className="font-semibold">
                           {session.user.name || "User"}
                         </span>
-                        <span className="text-xs bg-black/20 px-2 py-0.5 rounded-full">
-                          {/* {session.user.balance?.toLocaleString() || "0"} THB */}
-                        </span>
+                        {/* <span className="text-xs bg-black/20 px-2 py-0.5 rounded-full">
+                          {session.user.balance?.toLocaleString() || "0"} THB
+                        </span> */}
                       </div>
                     </div>
                   </Link>
