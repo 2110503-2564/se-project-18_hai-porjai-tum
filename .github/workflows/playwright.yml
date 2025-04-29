@@ -1,32 +1,44 @@
 name: Playwright Tests
+
 on:
   push:
-    branches: [ main, master ]
+    branches:
+      - main
   pull_request:
-    branches: [ main, master ]
+    branches:
+      - main
+
 jobs:
-  test:
-    timeout-minutes: 60
+  e2e-tests:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: xvfb-run --auto-servernum --server-args='-screen 0 1280x720x24' npm run test:e2e
-      env:
-        NEXTAUTH_URL: http://localhost:3000
-        NEXTAUTH_SECRET: 'Ey7nTKnggBc0bRN8WUjyShw2qzOZ6KW4fUyqcKBePxY='
-        NEXT_PUBLIC_API_URL: https://sw2-backend-backup1.onrender.com/api/v1/
-        CI: true
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests (with xvfb)
+        run: |
+          xvfb-run --auto-servernum --server-args='-screen 0 1280x720x24' npm run test:e2e
+        env:
+          NEXTAUTH_URL: http://localhost:3000
+          NEXTAUTH_SECRET: 'Ey7nTKnggBc0bRN8WUjyShw2qzOZ6KW4fUyqcKBePxY='
+          NEXT_PUBLIC_API_URL: https://sw2-backend-backup1.onrender.com/api/v1/
+          CI: true
+
+      - name: Upload Playwright Test Report (only if failed)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
