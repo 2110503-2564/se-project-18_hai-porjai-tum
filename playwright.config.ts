@@ -45,6 +45,7 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    headless: true, // << Force headless mode
     baseURL: 'http://localhost:3000',
     trace: "on-first-retry",
   },
