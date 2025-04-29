@@ -124,7 +124,7 @@ export default function ManageUserPage({ token }: { token: string }) {
                     ) : (
                       <>
                        {userTier}
-                        <button onClick={() => handleEditClick(user)}>
+                        <button data-testid={user._id} onClick={() => handleEditClick(user)}>
                           <Pencil
                             size={16}
                             className="text-gray-500 hover:text-orange-500"

@@ -9,7 +9,7 @@ export default async function ManageUser() {
     return (
         <main className="p-6">
             <div className="text-center text-lg mb-4">Manage Users</div>
-            <ManageUserPage token={token} />
+            {session && (session.user.role === 'admin') ? <ManageUserPage token={token} /> : null}
         </main>
     )
 }
