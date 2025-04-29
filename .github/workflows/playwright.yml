@@ -27,6 +27,9 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      - name: Wake up Render backend
+        run: curl -s https://sw2-backend-backup1.onrender.com/api/v1/cars || true
+
       - name: Run Playwright tests (with xvfb)
         run: |
           xvfb-run --auto-servernum --server-args='-screen 0 1280x720x24' npm run test:e2e
