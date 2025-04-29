@@ -1,0 +1,13 @@
+node_modules
+.next
+Dockerfile
+docker-compose.yml
+.dockerignore
+.git
+.gitignore
+.env
+.env.local
+.vscode
+*.log
+Thumbs.db
+.DS_Store
