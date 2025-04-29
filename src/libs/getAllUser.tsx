@@ -1,5 +1,5 @@
 export default async function getAllUsers(authToken: string) {
-    const response = await fetch("https://sw2-backend-backup1.onrender.com/api/v1/users", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/users`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

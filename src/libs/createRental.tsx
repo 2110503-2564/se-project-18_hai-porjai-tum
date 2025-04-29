@@ -1,5 +1,5 @@
 export default async function createRental(cid: string, uid:string, rentalItem: RentalItem, token: string) {
-    const response = await fetch(`https://sw2-backend-backup1.onrender.com/api/v1/cars/${cid}/rentals`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/cars/${cid}/rentals`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

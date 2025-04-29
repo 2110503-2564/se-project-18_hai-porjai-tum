@@ -1,5 +1,5 @@
 export default async function deleteRental(id: string, token: string) {
-    const response = await fetch(`https://sw2-backend-backup1.onrender.com/api/v1/rentals/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/rentals/${id}`, {
         method: "DELETE",
         headers: {
             authorization: `Bearer ${token}`,

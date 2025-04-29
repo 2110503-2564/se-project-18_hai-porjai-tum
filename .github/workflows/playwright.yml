@@ -33,7 +33,7 @@ jobs:
         env:
           NEXTAUTH_URL: http://localhost:3000
           NEXTAUTH_SECRET: 'Ey7nTKnggBc0bRN8WUjyShw2qzOZ6KW4fUyqcKBePxY='
-          NEXT_PUBLIC_API_URL: https://sw2-backend-backup1.onrender.com/api/v1/
+          NEXT_PUBLIC_API_URL: https://sw2-backend-backup1.onrender.com
           CI: true
 
       - name: Upload Playwright Test Report (only if failed)

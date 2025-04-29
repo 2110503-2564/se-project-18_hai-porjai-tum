@@ -6,7 +6,7 @@ export default async function updateRental(id: string,
     pickupLocation: string,
     returnLocation: string,
      token: string) {
-    const response = await fetch(`https://sw2-backend-backup1.onrender.com/api/v1/rentals/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/rentals/${id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
