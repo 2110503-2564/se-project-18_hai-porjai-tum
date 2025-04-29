@@ -18,7 +18,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npm run test:e2e
+      run: xvfb-run --auto-servernum --server-args='-screen 0 1280x720x24' npm run test:e2e
       env:
         NEXTAUTH_URL: http://localhost:3000
         NEXTAUTH_SECRET: 'Ey7nTKnggBc0bRN8WUjyShw2qzOZ6KW4fUyqcKBePxY='
